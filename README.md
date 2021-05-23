@@ -1,7 +1,7 @@
 # rentup
     RentUp - Alugue qualquer coisa!
 
-RentUp é um sistema desenvolvido para a disciplina Práticas de Desenvolvimento de Software da Universidade Federal de Minas Gerais. 
+RentUp é um sistema desenvolvido para a disciplina Prática em Desenvolvimento de Software da Universidade Federal de Minas Gerais. 
 
 ## Equipe
 
