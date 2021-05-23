@@ -18,10 +18,10 @@ Com seu cadastro realizado, é possível incluir novos produtos ao seu portfóli
 
 ## Tecnologias utilizadas
 
-Backend: Java, Quarkus
-Frontend: React
-BD: MySQL e NoSQL (MongoDB) 
-Testes: JUnit, Jest, Cypress
-Linter: ESLint, Prettier
-CI/CD: Github Actions
+Backend: Java, Quarkus\
+Frontend: React\
+BD: MySQL e NoSQL (MongoDB)\
+Testes: JUnit, Jest, Cypress\
+Linter: ESLint, Prettier\
+CI/CD: Github Actions\
 Logging/Analytics: Firebase
