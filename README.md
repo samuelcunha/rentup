@@ -18,26 +18,26 @@ Com seu cadastro realizado, é possível incluir novos produtos ao seu portfóli
 
 ## Tecnologias utilizadas
 
-Backend: Java, Quarkus\
-Frontend: React\
-BD: MySQL e NoSQL (MongoDB)\
-Testes: JUnit, Jest, Cypress\
-Linter: ESLint, Prettier\
-CI/CD: Github Actions\
-Logging/Analytics: Firebase
+- Backend: Java, Quarkus
+- Frontend: React
+- BD: MySQL e NoSQL (MongoDB)
+- Testes: JUnit, Jest, Cypress
+- Linter: ESLint, Prettier
+- CI/CD: Github Actions
+- Logging/Analytics: Firebase
 
-## Histórias
+## Histórias de Usuário
 
-Como usuário, quero me cadastrar na plataforma, infomando meus dados pessoais e minha localização e podendo utilizar a mesma conta tanto para alugar como para anunciar itens\
-Como usuário, quero me autenticar na plataforma com e-mail e senha\
-Como locatário, quero pesquisar um item a partir de seu nome, podendo filtrar por proximidade, categorias ou faixas de preços\
-Como locatário, quero solicitar a locação de um item por um período em dias e pagar um percentual do valor para garantir a reserva\
-Como locatário, quero cadastrar meu cartão de crédito para realizar pagamentos\
-Como locatário, quero pagar o valor restante da locação e deixar uma avaliação ao devolver o item\
-Como locatário, devo pagar uma multa caso ultrapasse o prazo em dias acordado\
-Como locador, quero adicionar novos itens para locação, adicionando uma breve descrição, preço por dia, fotos e selecionar uma categoria correspondente\
-Como locador, quero visualizar as solicitações de locação de meus itens\
-Como locador, quero aprovar uma solicitação de locação\
+- Como usuário, quero me cadastrar na plataforma, infomando meus dados pessoais e minha localização, podendo utilizar a mesma conta tanto para alugar como para anunciar itens;
+- Como usuário, quero me autenticar na plataforma com e-mail e senha;
+- Como locatário, quero pesquisar um item a partir de seu nome, podendo filtrar por proximidade, categorias ou faixas de preços;
+- Como locatário, quero solicitar a locação de um item por um período em dias e pagar um percentual do valor para garantir a reserva;
+- Como locatário, quero cadastrar meu cartão de crédito para realizar pagamentos;
+- Como locatário, quero pagar o valor restante da locação e deixar uma avaliação ao devolver o item;
+- Como locatário, devo pagar uma multa caso ultrapasse o prazo em dias acordado;
+- Como locador, quero adicionar novos itens para locação, adicionando uma breve descrição, preço por dia, fotos e selecionar uma categoria correspondente;
+- Como locador, quero visualizar as solicitações de locação de meus itens;
+- Como locador, quero aprovar uma solicitação de locação.
 
 
 
