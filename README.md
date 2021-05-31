@@ -39,6 +39,8 @@ Com seu cadastro realizado, é possível incluir novos produtos ao seu portfóli
 - Como locador, quero visualizar as solicitações de locação de meus itens;
 - Como locador, quero aprovar uma solicitação de locação.
 
+## [Quadro Kanban](https://github.com/samuelcunha/rentup/projects/1)
+
 
 
 
