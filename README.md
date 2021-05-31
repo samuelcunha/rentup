@@ -5,8 +5,8 @@ RentUp é um sistema desenvolvido para a disciplina Prática em Desenvolvimento 
 
 ## Equipe
 
-- [Fábio Alves Pereira](https://github.com/fabiopereira96)
-- [Samuel Jesus Pereira Cunha](https://github.com/samuelcunha)
+- [Fábio Alves Pereira](https://github.com/fabiopereira96) (Backend)
+- [Samuel Jesus Pereira Cunha](https://github.com/samuelcunha) (Frontend)
 
 ## Escopo Funcional
 
