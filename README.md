@@ -1,7 +1,8 @@
 # rentup
+
     RentUp - Alugue qualquer coisa!
 
-RentUp é um sistema desenvolvido para a disciplina Prática em Desenvolvimento de Software da Universidade Federal de Minas Gerais. 
+RentUp é um sistema desenvolvido para a disciplina Prática em Desenvolvimento de Software da Universidade Federal de Minas Gerais.
 
 ## Equipe
 
@@ -10,11 +11,11 @@ RentUp é um sistema desenvolvido para a disciplina Prática em Desenvolvimento 
 
 ## Escopo Funcional
 
-Seu objetivo é permitir que pessoas aluguem itens de qualquer forma ou categoria, desde uma chave de fenda que possui em seu porão até aparelhos eletrônicos e domésticos. 
+Seu objetivo é permitir que pessoas aluguem itens de qualquer forma ou categoria, desde uma chave de fenda que possui em seu porão até aparelhos eletrônicos e domésticos.
 
-Para isso, o sistema terá um amplo catálogo de produtos e categorias pré-estabelecidas com faixas de preços sugeridas e históricos de alocações semelhantes. Além disso, cada cliente poderá se cadastrar no sistema por meio de um cadastro único, tanto para locadores quanto para locatários. 
+Para isso, o sistema terá um amplo catálogo de produtos e categorias pré-estabelecidas com faixas de preços sugeridas e históricos de alocações semelhantes. Além disso, cada cliente poderá se cadastrar no sistema por meio de um cadastro único, tanto para locadores quanto para locatários.
 
-Com seu cadastro realizado, é possível incluir novos produtos ao seu portfólio de alocações ou procurar itens para realizar o aluguel por proximidade, categorias ou faixas de preços. 
+Com seu cadastro realizado, é possível incluir novos produtos ao seu portfólio de alocações ou procurar itens para realizar o aluguel por proximidade, categorias ou faixas de preços.
 
 ## Tecnologias utilizadas
 
@@ -43,8 +44,8 @@ Com seu cadastro realizado, é possível incluir novos produtos ao seu portfóli
 
 ## Arquitetura Geral
 
-Nosso projeto arquitetural consiste em um dispositivo mobile que fará requisições 
-REST para o Backend da aplicação dividido por domínios de negócios e com Clients 
-relacionados a chamadas HTTP e conexões com Bancos de Dados Relacionais e Não Relacionais. 
+Nosso projeto arquitetural consiste em um dispositivo mobile que fará requisições
+REST para o Backend da aplicação dividido por domínios de negócios e com Clients
+relacionados a chamadas HTTP e conexões com Bancos de Dados Relacionais e Não Relacionais.
 
-![Diagram](imgs/desenho-arquitetural-rentup-ARQ-GERAL.png)
+![Diagram](src/main/resources/imgs/desenho-arquitetural-rentup-ARQ-GERAL.png)
