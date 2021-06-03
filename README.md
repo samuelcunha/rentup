@@ -41,7 +41,10 @@ Com seu cadastro realizado, é possível incluir novos produtos ao seu portfóli
 
 ## [Kanban](https://github.com/samuelcunha/rentup/projects/1)
 
+## Arquitetura Geral
 
+Nosso projeto arquitetural consiste em um dispositivo mobile que fará requisições 
+REST para o Backend da aplicação dividido por domínios de negócios e com Clients 
+relacionados a chamadas HTTP e conexões com Bancos de Dados Relacionais e Não Relacionais. 
 
-
-
+![Diagram](imgs/desenho-arquitetural-rentup-ARQ-GERAL.png)
