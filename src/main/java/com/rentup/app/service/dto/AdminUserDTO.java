@@ -1,5 +1,7 @@
 package com.rentup.app.service.dto;
 
+import static com.rentup.app.service.mapper.AddressMapper.addressToAddressDTO;
+
 import com.rentup.app.config.Constants;
 import com.rentup.app.domain.Authority;
 import com.rentup.app.domain.User;
@@ -48,6 +50,8 @@ public class AdminUserDTO {
 
     private Set<String> authorities;
 
+    private AddressDTO address;
+
     public AdminUserDTO() {
         // Empty constructor needed for Jackson.
     }
@@ -61,6 +65,7 @@ public class AdminUserDTO {
         this.activated = user.isActivated();
         this.imageUrl = user.getImageUrl();
         this.langKey = user.getLangKey();
+        this.address = addressToAddressDTO(user.getAddress());
         this.createdBy = user.getCreatedBy();
         this.createdDate = user.getCreatedDate();
         this.lastModifiedBy = user.getLastModifiedBy();
@@ -170,6 +175,14 @@ public class AdminUserDTO {
 
     public void setAuthorities(Set<String> authorities) {
         this.authorities = authorities;
+    }
+
+    public AddressDTO getAddress() {
+        return address;
+    }
+
+    public void setAddress(AddressDTO address) {
+        this.address = address;
     }
 
     // prettier-ignore

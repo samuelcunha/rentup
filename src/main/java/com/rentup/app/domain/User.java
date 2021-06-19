@@ -74,6 +74,9 @@ public class User extends AbstractAuditingEntity implements Serializable {
     @Field("reset_date")
     private Instant resetDate = null;
 
+    @Field("address")
+    private Address address;
+
     @JsonIgnore
     private Set<Authority> authorities = new HashSet<>();
 
@@ -180,6 +183,14 @@ public class User extends AbstractAuditingEntity implements Serializable {
 
     public void setAuthorities(Set<Authority> authorities) {
         this.authorities = authorities;
+    }
+
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
     }
 
     @Override
