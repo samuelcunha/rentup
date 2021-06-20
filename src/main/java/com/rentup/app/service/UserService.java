@@ -1,6 +1,6 @@
 package com.rentup.app.service;
 
-import static com.rentup.app.service.mapper.AddressMapper.*;
+import static com.rentup.app.service.mapper.AddressMapper.addressDTOToAddress;
 
 import com.rentup.app.config.Constants;
 import com.rentup.app.domain.Authority;
@@ -14,7 +14,8 @@ import com.rentup.app.service.dto.UserDTO;
 import com.rentup.app.web.rest.util.DateUtil;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
-import java.util.*;
+import java.util.HashSet;
+import java.util.Set;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Pageable;
