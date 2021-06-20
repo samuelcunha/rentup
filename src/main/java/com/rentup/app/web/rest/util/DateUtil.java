@@ -1,11 +1,9 @@
 package com.rentup.app.web.rest.util;
 
-import static java.time.ZonedDateTime.*;
-import static java.time.temporal.ChronoUnit.*;
+import static java.time.ZonedDateTime.ofInstant;
+import static java.time.temporal.ChronoUnit.YEARS;
 import static java.util.Objects.isNull;
-import static java.util.Objects.nonNull;
 import static org.apache.commons.lang3.StringUtils.isEmpty;
-import static org.apache.commons.lang3.StringUtils.substringBeforeLast;
 
 import com.rentup.app.web.rest.errors.InvalidDateException;
 import com.rentup.app.web.rest.errors.InvalidDateLegalAgeException;
