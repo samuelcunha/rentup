@@ -15,6 +15,7 @@ public class AddressMapper {
             addressDTO.setCity(address.getCity());
             addressDTO.setStreet(address.getStreet());
             addressDTO.setZipCode(address.getZipCode());
+            addressDTO.setComplement(address.getComplement());
             addressDTO.setNumber(address.getNumber());
             return addressDTO;
         }
@@ -31,6 +32,7 @@ public class AddressMapper {
             address.setStreet(addressDTO.getStreet());
             address.setZipCode(addressDTO.getZipCode());
             address.setNumber(addressDTO.getNumber());
+            address.setComplement(addressDTO.getComplement());
             return address;
         }
     }

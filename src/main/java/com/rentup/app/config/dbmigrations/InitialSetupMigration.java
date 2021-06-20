@@ -51,7 +51,7 @@ public class InitialSetupMigration {
         adminUser.getAuthorities().add(adminAuthority);
         adminUser.getAuthorities().add(userAuthority);
         adminUser.setAddress(getAddress());
-        adminUser.setBirthDate(new SimpleDateFormat(DATE_FORMAT).parse("2000-02-20"));
+        adminUser.setBirthDate(new SimpleDateFormat(DATE_FORMAT).parse("2003-06-20"));
         mongoTemplate.save(adminUser);
 
         User userUser = new User();
@@ -67,7 +67,7 @@ public class InitialSetupMigration {
         userUser.setCreatedDate(Instant.now());
         userUser.getAuthorities().add(userAuthority);
         userUser.setAddress(getAddress());
-        userUser.setBirthDate(new SimpleDateFormat(DATE_FORMAT).parse("2001-02-20"));
+        userUser.setBirthDate(new SimpleDateFormat(DATE_FORMAT).parse("2003-06-20"));
         mongoTemplate.save(userUser);
     }
 
@@ -78,6 +78,7 @@ public class InitialSetupMigration {
         address.setCity("Belo Horizonte");
         address.setStreet("Rua Jesus");
         address.setZipCode("31270200");
+        address.setComplement("Bloco 1 Apto 102");
         address.setNumber("202C");
         return address;
     }
