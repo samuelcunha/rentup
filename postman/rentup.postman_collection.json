@@ -1,0 +1,250 @@
+{
+	"info": {
+		"_postman_id": "98f8a23c-3aa1-484e-9e94-9426bbb54b5e",
+		"name": "rentup",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "CRUD Users",
+			"item": [
+				{
+					"name": "Get All Users",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN_OAUTH}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/admin/users",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"admin",
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add User",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN_OAUTH}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "    {\n        \"login\": \"testeEmailReal\",\n        \"firstName\": \"Teste\",\n        \"lastName\": \"Postman\",\n        \"email\": \"fabio.norbt@gmail.com\",\n        \"imageUrl\": null,\n        \"activated\": true,\n        \"langKey\": \"pt-br\",\n        \"authorities\": [\n            \"ROLE_USER\",\n            \"ROLE_ADMIN\"\n        ],\n        \"address\": {\n            \"street\": \"Rua Jesus\",\n            \"city\": \"Belo Horizonte\",\n            \"state\": \"MG\",\n            \"country\": \"Brazil\",\n            \"complement\": \"Apto 102\",\n            \"number\": \"333C\",\n            \"zipCode\": \"31270200\"\n        }\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/admin/users",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"admin",
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update User",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN_OAUTH}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "    {\n        \"id\": \"60ce5dbf8b259b4d9fa604f1\",\n        \"login\": \"testeEmailReal\",\n        \"firstName\": \"Teste\",\n        \"lastName\": \"Postman\",\n        \"email\": \"fabio.norbt@gmail.com\",\n        \"imageUrl\": null,\n        \"activated\": true,\n        \"langKey\": \"pt-br\",\n        \"authorities\": [\n            \"ROLE_USER\",\n            \"ROLE_ADMIN\"\n        ],\n        \"address\": {\n            \"street\": \"Alameda dos Ingleses\",\n            \"city\": \"Belo Horizonte\",\n            \"state\": \"MG\",\n            \"country\": \"Brazil\",\n            \"complement\": \"Apto 102\",\n            \"number\": \"333C\",\n            \"zipCode\": \"31270200\"\n        }\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/admin/users",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"admin",
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete User",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN_OAUTH}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/admin/users/:login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"admin",
+								"users",
+								":login"
+							],
+							"variable": [
+								{
+									"key": "login",
+									"value": "testeemailreal"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "56cba176-37c3-4361-a1d0-680fddfa4034",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "cd391e42-542f-472b-b1bd-495f4187a51b",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Get API Docs",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/v2/api-docs",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v2",
+						"api-docs"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Authenticate",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "a286e6dc-d167-43a3-a1ce-f9a7b2cf5e7d",
+						"exec": [
+							"let jsonData = JSON.parse(responseBody)",
+							"pm.globals.set(\"TOKEN_OAUTH\", jsonData.id_token);",
+							"pm.environment.set(\"TOKEN_OAUTH\", jsonData.id_token);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\": \"username\",\n    \"password\": \"password\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/authenticate",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"authenticate"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}

@@ -4,6 +4,7 @@ import com.github.cloudyrock.mongock.ChangeLog;
 import com.github.cloudyrock.mongock.ChangeSet;
 import com.github.cloudyrock.mongock.driver.mongodb.springdata.v3.decorator.impl.MongockTemplate;
 import com.rentup.app.config.Constants;
+import com.rentup.app.domain.Address;
 import com.rentup.app.domain.Authority;
 import com.rentup.app.domain.User;
 import com.rentup.app.security.AuthoritiesConstants;
@@ -45,6 +46,7 @@ public class InitialSetupMigration {
         adminUser.setCreatedDate(Instant.now());
         adminUser.getAuthorities().add(adminAuthority);
         adminUser.getAuthorities().add(userAuthority);
+        adminUser.setAddress(getAddress());
         mongoTemplate.save(adminUser);
 
         User userUser = new User();
@@ -59,6 +61,18 @@ public class InitialSetupMigration {
         userUser.setCreatedBy(Constants.SYSTEM);
         userUser.setCreatedDate(Instant.now());
         userUser.getAuthorities().add(userAuthority);
+        adminUser.setAddress(getAddress());
         mongoTemplate.save(userUser);
+    }
+
+    private Address getAddress() {
+        var address = new Address();
+        address.setCountry("Brazil");
+        address.setState("MG");
+        address.setCity("Belo Horizonte");
+        address.setStreet("Rua Jesus");
+        address.setZipCode("31270200");
+        address.setNumber("202C");
+        return address;
     }
 }

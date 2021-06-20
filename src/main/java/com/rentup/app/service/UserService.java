@@ -1,5 +1,7 @@
 package com.rentup.app.service;
 
+import static com.rentup.app.service.mapper.AddressMapper.*;
+
 import com.rentup.app.config.Constants;
 import com.rentup.app.domain.Authority;
 import com.rentup.app.domain.User;
@@ -127,6 +129,7 @@ public class UserService {
                             newUser.setEmail(userDTO.getEmail().toLowerCase());
                         }
                         newUser.setImageUrl(userDTO.getImageUrl());
+                        newUser.setAddress(addressDTOToAddress(userDTO.getAddress()));
                         newUser.setLangKey(userDTO.getLangKey());
                         // new user is not active
                         newUser.setActivated(false);
@@ -159,6 +162,7 @@ public class UserService {
             user.setEmail(userDTO.getEmail().toLowerCase());
         }
         user.setImageUrl(userDTO.getImageUrl());
+        user.setAddress(addressDTOToAddress(userDTO.getAddress()));
         if (userDTO.getLangKey() == null) {
             user.setLangKey(Constants.DEFAULT_LANGUAGE); // default language
         } else {
@@ -202,6 +206,7 @@ public class UserService {
                         user.setEmail(userDTO.getEmail().toLowerCase());
                     }
                     user.setImageUrl(userDTO.getImageUrl());
+                    user.setAddress(addressDTOToAddress(userDTO.getAddress()));
                     user.setActivated(userDTO.isActivated());
                     user.setLangKey(userDTO.getLangKey());
                     Set<Authority> managedAuthorities = user.getAuthorities();

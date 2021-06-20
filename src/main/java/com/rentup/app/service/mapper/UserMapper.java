@@ -1,7 +1,9 @@
 package com.rentup.app.service.mapper;
 
+import com.rentup.app.domain.Address;
 import com.rentup.app.domain.Authority;
 import com.rentup.app.domain.User;
+import com.rentup.app.service.dto.AddressDTO;
 import com.rentup.app.service.dto.AdminUserDTO;
 import com.rentup.app.service.dto.UserDTO;
 import java.util.*;
