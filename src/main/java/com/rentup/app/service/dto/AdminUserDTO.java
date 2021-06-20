@@ -5,6 +5,7 @@ import static com.rentup.app.service.mapper.AddressMapper.addressToAddressDTO;
 import com.rentup.app.config.Constants;
 import com.rentup.app.domain.Authority;
 import com.rentup.app.domain.User;
+import com.rentup.app.web.rest.util.DateUtil;
 import java.time.Instant;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -50,6 +51,8 @@ public class AdminUserDTO {
 
     private Set<String> authorities;
 
+    private String birthDate;
+
     private AddressDTO address;
 
     public AdminUserDTO() {
@@ -65,6 +68,7 @@ public class AdminUserDTO {
         this.activated = user.isActivated();
         this.imageUrl = user.getImageUrl();
         this.langKey = user.getLangKey();
+        this.birthDate = DateUtil.toDateWithDefaultFormat(user.getBirthDate());
         this.address = addressToAddressDTO(user.getAddress());
         this.createdBy = user.getCreatedBy();
         this.createdDate = user.getCreatedDate();
@@ -175,6 +179,14 @@ public class AdminUserDTO {
 
     public void setAuthorities(Set<String> authorities) {
         this.authorities = authorities;
+    }
+
+    public String getBirthDate() {
+        return birthDate;
+    }
+
+    public void setBirthDate(String birthDate) {
+        this.birthDate = birthDate;
     }
 
     public AddressDTO getAddress() {

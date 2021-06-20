@@ -1,5 +1,7 @@
 package com.rentup.app.config.dbmigrations;
 
+import static com.rentup.app.web.rest.util.DateUtil.DATE_FORMAT;
+
 import com.github.cloudyrock.mongock.ChangeLog;
 import com.github.cloudyrock.mongock.ChangeSet;
 import com.github.cloudyrock.mongock.driver.mongodb.springdata.v3.decorator.impl.MongockTemplate;
@@ -8,6 +10,8 @@ import com.rentup.app.domain.Address;
 import com.rentup.app.domain.Authority;
 import com.rentup.app.domain.User;
 import com.rentup.app.security.AuthoritiesConstants;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.Instant;
 
 /**
@@ -27,7 +31,7 @@ public class InitialSetupMigration {
     }
 
     @ChangeSet(order = "02", author = "initiator", id = "02-addUsers")
-    public void addUsers(MongockTemplate mongoTemplate) {
+    public void addUsers(MongockTemplate mongoTemplate) throws ParseException {
         Authority adminAuthority = new Authority();
         adminAuthority.setName(AuthoritiesConstants.ADMIN);
         Authority userAuthority = new Authority();
@@ -47,6 +51,7 @@ public class InitialSetupMigration {
         adminUser.getAuthorities().add(adminAuthority);
         adminUser.getAuthorities().add(userAuthority);
         adminUser.setAddress(getAddress());
+        adminUser.setBirthDate(new SimpleDateFormat(DATE_FORMAT).parse("2000-02-20"));
         mongoTemplate.save(adminUser);
 
         User userUser = new User();
@@ -61,7 +66,8 @@ public class InitialSetupMigration {
         userUser.setCreatedBy(Constants.SYSTEM);
         userUser.setCreatedDate(Instant.now());
         userUser.getAuthorities().add(userAuthority);
-        adminUser.setAddress(getAddress());
+        userUser.setAddress(getAddress());
+        userUser.setBirthDate(new SimpleDateFormat(DATE_FORMAT).parse("2001-02-20"));
         mongoTemplate.save(userUser);
     }
 
