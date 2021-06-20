@@ -7,6 +7,7 @@ import com.rentup.app.security.AuthoritiesConstants;
 import com.rentup.app.service.MailService;
 import com.rentup.app.service.UserService;
 import com.rentup.app.service.dto.AdminUserDTO;
+import com.rentup.app.service.mapper.UserMapper;
 import com.rentup.app.web.rest.errors.BadRequestAlertException;
 import com.rentup.app.web.rest.errors.EmailAlreadyUsedException;
 import com.rentup.app.web.rest.errors.LoginAlreadyUsedException;
@@ -18,6 +19,7 @@ import java.util.Collections;
 import java.util.List;
 import javax.validation.Valid;
 import javax.validation.constraints.Pattern;
+import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -64,8 +66,14 @@ import tech.jhipster.web.util.PaginationUtil;
 @RequestMapping("/api/admin")
 public class UserResource {
 
-    private static final List<String> ALLOWED_ORDERED_PROPERTIES = Collections.unmodifiableList(
-        Arrays.asList("id", "login", "firstName", "lastName", "email", "activated", "langKey")
+    private static final List<String> ALLOWED_ORDERED_PROPERTIES = List.of(
+        "id",
+        "login",
+        "firstName",
+        "lastName",
+        "email",
+        "activated",
+        "langKey"
     );
 
     private final Logger log = LoggerFactory.getLogger(UserResource.class);
@@ -74,15 +82,15 @@ public class UserResource {
     private String applicationName;
 
     private final UserService userService;
-
     private final UserRepository userRepository;
-
     private final MailService mailService;
+    private final UserMapper mapper;
 
-    public UserResource(UserService userService, UserRepository userRepository, MailService mailService) {
+    public UserResource(UserService userService, UserRepository userRepository, MailService mailService, UserMapper mapper) {
         this.userService = userService;
         this.userRepository = userRepository;
         this.mailService = mailService;
+        this.mapper = mapper;
     }
 
     /**
@@ -98,7 +106,7 @@ public class UserResource {
      */
     @PostMapping("/users")
     @PreAuthorize("hasAuthority(\"" + AuthoritiesConstants.ADMIN + "\")")
-    public Mono<ResponseEntity<User>> createUser(@Valid @RequestBody AdminUserDTO userDTO) {
+    public Mono<ResponseEntity<AdminUserDTO>> createUser(@Valid @RequestBody AdminUserDTO userDTO) {
         log.debug("REST request to save User : {}", userDTO);
 
         if (userDTO.getId() != null) {
@@ -132,7 +140,7 @@ public class UserResource {
                         return ResponseEntity
                             .created(new URI("/api/admin/users/" + user.getLogin()))
                             .headers(HeaderUtil.createAlert(applicationName, "userManagement.created", user.getLogin()))
-                            .body(user);
+                            .body(mapper.userToAdminUserDTO(user));
                     } catch (URISyntaxException e) {
                         throw new RuntimeException(e);
                     }

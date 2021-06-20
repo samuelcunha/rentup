@@ -11,6 +11,7 @@ import com.rentup.app.security.AuthoritiesConstants;
 import com.rentup.app.security.SecurityUtils;
 import com.rentup.app.service.dto.AdminUserDTO;
 import com.rentup.app.service.dto.UserDTO;
+import com.rentup.app.web.rest.util.DateUtil;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 import java.util.*;
@@ -129,6 +130,7 @@ public class UserService {
                             newUser.setEmail(userDTO.getEmail().toLowerCase());
                         }
                         newUser.setImageUrl(userDTO.getImageUrl());
+                        newUser.setBirthDate(DateUtil.toDateAndValidateLegalAge(userDTO.getBirthDate()));
                         newUser.setAddress(addressDTOToAddress(userDTO.getAddress()));
                         newUser.setLangKey(userDTO.getLangKey());
                         // new user is not active
@@ -162,6 +164,7 @@ public class UserService {
             user.setEmail(userDTO.getEmail().toLowerCase());
         }
         user.setImageUrl(userDTO.getImageUrl());
+        user.setBirthDate(DateUtil.toDateAndValidateLegalAge(userDTO.getBirthDate()));
         user.setAddress(addressDTOToAddress(userDTO.getAddress()));
         if (userDTO.getLangKey() == null) {
             user.setLangKey(Constants.DEFAULT_LANGUAGE); // default language
@@ -207,6 +210,7 @@ public class UserService {
                     }
                     user.setImageUrl(userDTO.getImageUrl());
                     user.setAddress(addressDTOToAddress(userDTO.getAddress()));
+                    user.setBirthDate(DateUtil.toDateAndValidateLegalAge(userDTO.getBirthDate()));
                     user.setActivated(userDTO.isActivated());
                     user.setLangKey(userDTO.getLangKey());
                     Set<Authority> managedAuthorities = user.getAuthorities();
