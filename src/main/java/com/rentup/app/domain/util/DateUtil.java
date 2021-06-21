@@ -1,4 +1,4 @@
-package com.rentup.app.web.rest.util;
+package com.rentup.app.domain.util;
 
 import static java.time.ZonedDateTime.ofInstant;
 import static java.time.temporal.ChronoUnit.YEARS;

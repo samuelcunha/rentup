@@ -5,7 +5,7 @@ import static com.rentup.app.service.mapper.AddressMapper.addressToAddressDTO;
 import com.rentup.app.config.Constants;
 import com.rentup.app.domain.Authority;
 import com.rentup.app.domain.User;
-import com.rentup.app.web.rest.util.DateUtil;
+import com.rentup.app.domain.util.DateUtil;
 import java.time.Instant;
 import java.util.Set;
 import java.util.stream.Collectors;

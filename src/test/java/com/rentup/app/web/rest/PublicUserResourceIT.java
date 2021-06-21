@@ -7,6 +7,7 @@ import com.rentup.app.domain.User;
 import com.rentup.app.repository.UserRepository;
 import com.rentup.app.security.AuthoritiesConstants;
 import com.rentup.app.service.dto.UserDTO;
+import java.text.ParseException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,7 +35,7 @@ class PublicUserResourceIT {
     private User user;
 
     @BeforeEach
-    public void initTest() {
+    public void initTest() throws ParseException {
         user = UserResourceIT.initTestUser(userRepository);
     }
 
