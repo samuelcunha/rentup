@@ -16,6 +16,7 @@ export const PrivateRouteComponent = ({
   isAuthenticated,
   sessionHasBeenFetched,
   isAuthorized,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   hasAnyAuthorities = [],
   ...rest
 }: IPrivateRouteProps) => {

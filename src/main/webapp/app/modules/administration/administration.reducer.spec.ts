@@ -17,8 +17,6 @@ import administration, {
 } from './administration.reducer';
 
 describe('Administration reducer tests', () => {
-  const username = process.env.E2E_USERNAME ?? 'admin';
-
   function isEmpty(element): boolean {
     if (element instanceof Array) {
       return element.length === 0;

@@ -1,3 +1,4 @@
+/* istanbul ignore file */
 import { isPromise } from 'react-jhipster';
 
 const getErrorMessage = errorData => {
