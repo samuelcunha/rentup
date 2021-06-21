@@ -38,6 +38,7 @@ local.properties
 .loadpath
 .factorypath
 /src/main/resources/rebel.xml
+.history
 
 # External tool builders
 .externalToolBuilders/**
