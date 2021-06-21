@@ -112,10 +112,11 @@ export const getSession: () => void = () => async (dispatch, getState) => {
   }
 };
 
-export const login: (username: string, password: string, rememberMe?: boolean) => void = (username, password, rememberMe = false) => async (
-  dispatch,
-  getState
-) => {
+export const login: (username: string, password: string, rememberMe?: boolean) => void = (
+  username,
+  password,
+  rememberMe = false
+) => async dispatch => {
   const result = await dispatch({
     type: ACTION_TYPES.LOGIN,
     payload: axios.post('api/authenticate', { username, password, rememberMe }),
@@ -148,7 +149,7 @@ export const logout: () => void = () => dispatch => {
   });
 };
 
-export const clearAuthentication = messageKey => (dispatch, getState) => {
+export const clearAuthentication = messageKey => dispatch => {
   clearAuthToken();
   dispatch(displayAuthError(messageKey));
   dispatch({

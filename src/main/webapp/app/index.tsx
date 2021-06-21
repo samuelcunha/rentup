@@ -12,6 +12,7 @@ import ErrorBoundary from './shared/error/error-boundary';
 import AppComponent from './app';
 import { loadIcons } from './config/icon-loader';
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const devTools = process.env.NODE_ENV === 'development' ? <DevTools /> : null;
 
 const store = initStore();
@@ -31,7 +32,7 @@ const render = Component =>
       <Provider store={store}>
         <div>
           {/* If this slows down the app in dev disable it and enable when required  */}
-          {devTools}
+          {/* {devTools} */}
           <Component />
         </div>
       </Provider>

@@ -13,6 +13,7 @@ export interface IMenuItem {
 
 export default class MenuItem extends React.Component<IMenuItem> {
   render() {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { to, icon, id, children, 'data-cy': string } = this.props;
 
     return (

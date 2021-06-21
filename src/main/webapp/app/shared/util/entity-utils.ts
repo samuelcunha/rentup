@@ -1,3 +1,4 @@
+/* istanbul ignore file */
 import pick from 'lodash/pick';
 import { IPaginationBaseState } from 'react-jhipster';
 

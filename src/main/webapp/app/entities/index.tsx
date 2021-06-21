@@ -6,7 +6,7 @@ import ErrorBoundaryRoute from 'app/shared/error/error-boundary-route';
 
 /* jhipster-needle-add-route-import - JHipster will add routes here */
 
-const Routes = ({ match }) => (
+const Routes = () => (
   <div>
     <Switch>
       {/* prettier-ignore */}
