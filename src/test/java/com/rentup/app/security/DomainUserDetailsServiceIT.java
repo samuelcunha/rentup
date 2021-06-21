@@ -1,11 +1,14 @@
 package com.rentup.app.security;
 
+import static com.rentup.app.domain.util.DateUtil.DATE_FORMAT;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 import com.rentup.app.IntegrationTest;
 import com.rentup.app.domain.User;
 import com.rentup.app.repository.UserRepository;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Locale;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.jupiter.api.BeforeEach;
@@ -34,7 +37,7 @@ class DomainUserDetailsServiceIT {
     private ReactiveUserDetailsService domainUserDetailsService;
 
     @BeforeEach
-    public void init() {
+    public void init() throws ParseException {
         userRepository.deleteAll().block();
 
         User userOne = new User();
@@ -45,6 +48,7 @@ class DomainUserDetailsServiceIT {
         userOne.setFirstName("userOne");
         userOne.setLastName("doe");
         userOne.setLangKey("en");
+        userOne.setBirthDate(new SimpleDateFormat(DATE_FORMAT).parse("2003-06-20"));
         userRepository.save(userOne).block();
 
         User userTwo = new User();
@@ -55,6 +59,7 @@ class DomainUserDetailsServiceIT {
         userTwo.setFirstName("userTwo");
         userTwo.setLastName("doe");
         userTwo.setLangKey("en");
+        userTwo.setBirthDate(new SimpleDateFormat(DATE_FORMAT).parse("2003-06-20"));
         userRepository.save(userTwo).block();
 
         User userThree = new User();
@@ -65,6 +70,7 @@ class DomainUserDetailsServiceIT {
         userThree.setFirstName("userThree");
         userThree.setLastName("doe");
         userThree.setLangKey("en");
+        userThree.setBirthDate(new SimpleDateFormat(DATE_FORMAT).parse("2003-06-20"));
         userRepository.save(userThree).block();
     }
 

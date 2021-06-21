@@ -1,9 +1,12 @@
 package com.rentup.app.web.rest;
 
+import static com.rentup.app.domain.util.DateUtil.DATE_FORMAT;
+
 import com.rentup.app.IntegrationTest;
 import com.rentup.app.domain.User;
 import com.rentup.app.repository.UserRepository;
 import com.rentup.app.web.rest.vm.LoginVM;
+import java.text.SimpleDateFormat;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.reactive.AutoConfigureWebTestClient;
@@ -33,6 +36,7 @@ class UserJWTControllerIT {
         user.setLogin("user-jwt-controller");
         user.setEmail("user-jwt-controller@example.com");
         user.setActivated(true);
+        user.setBirthDate(new SimpleDateFormat(DATE_FORMAT).parse("2003-06-20"));
         user.setPassword(passwordEncoder.encode("test"));
 
         userRepository.save(user).block();
@@ -61,6 +65,7 @@ class UserJWTControllerIT {
         user.setLogin("user-jwt-controller-remember-me");
         user.setEmail("user-jwt-controller-remember-me@example.com");
         user.setActivated(true);
+        user.setBirthDate(new SimpleDateFormat(DATE_FORMAT).parse("2003-06-20"));
         user.setPassword(passwordEncoder.encode("test"));
 
         userRepository.save(user).block();

@@ -1,6 +1,6 @@
 package com.rentup.app.config.dbmigrations;
 
-import static com.rentup.app.web.rest.util.DateUtil.DATE_FORMAT;
+import static com.rentup.app.domain.util.DateUtil.DATE_FORMAT;
 
 import com.github.cloudyrock.mongock.ChangeLog;
 import com.github.cloudyrock.mongock.ChangeSet;

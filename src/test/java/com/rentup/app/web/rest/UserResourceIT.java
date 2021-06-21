@@ -1,5 +1,6 @@
 package com.rentup.app.web.rest;
 
+import static com.rentup.app.domain.util.DateUtil.DATE_FORMAT;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import com.rentup.app.IntegrationTest;
@@ -11,6 +12,8 @@ import com.rentup.app.service.dto.AdminUserDTO;
 import com.rentup.app.service.dto.UserDTO;
 import com.rentup.app.service.mapper.UserMapper;
 import com.rentup.app.web.rest.vm.ManagedUserVM;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.Instant;
 import java.util.*;
 import java.util.function.Consumer;
@@ -71,12 +74,13 @@ class UserResourceIT {
      * This is a static method, as tests for other entities might also need it,
      * if they test an entity which has a required relationship to the User entity.
      */
-    public static User createEntity() {
+    public static User createEntity() throws ParseException {
         User user = new User();
         user.setLogin(DEFAULT_LOGIN);
         user.setPassword(RandomStringUtils.random(60));
         user.setActivated(true);
         user.setEmail(DEFAULT_EMAIL);
+        user.setBirthDate(new SimpleDateFormat(DATE_FORMAT).parse("2003-06-20"));
         user.setFirstName(DEFAULT_FIRSTNAME);
         user.setLastName(DEFAULT_LASTNAME);
         user.setImageUrl(DEFAULT_IMAGEURL);
@@ -87,14 +91,14 @@ class UserResourceIT {
     /**
      * Setups the database with one user.
      */
-    public static User initTestUser(UserRepository userRepository) {
+    public static User initTestUser(UserRepository userRepository) throws ParseException {
         userRepository.deleteAll().block();
         User user = createEntity();
         return user;
     }
 
     @BeforeEach
-    public void initTest() {
+    public void initTest() throws ParseException {
         user = initTestUser(userRepository);
     }
 
@@ -109,6 +113,7 @@ class UserResourceIT {
         managedUserVM.setFirstName(DEFAULT_FIRSTNAME);
         managedUserVM.setLastName(DEFAULT_LASTNAME);
         managedUserVM.setEmail(DEFAULT_EMAIL);
+        managedUserVM.setBirthDate("2003-06-20");
         managedUserVM.setActivated(true);
         managedUserVM.setImageUrl(DEFAULT_IMAGEURL);
         managedUserVM.setLangKey(DEFAULT_LANGKEY);
@@ -210,7 +215,8 @@ class UserResourceIT {
         managedUserVM.setPassword(DEFAULT_PASSWORD);
         managedUserVM.setFirstName(DEFAULT_FIRSTNAME);
         managedUserVM.setLastName(DEFAULT_LASTNAME);
-        managedUserVM.setEmail(DEFAULT_EMAIL); // this email should already be used
+        managedUserVM.setEmail(DEFAULT_EMAIL);
+        managedUserVM.setBirthDate("2021-06-03");
         managedUserVM.setActivated(true);
         managedUserVM.setImageUrl(DEFAULT_IMAGEURL);
         managedUserVM.setLangKey(DEFAULT_LANGKEY);
@@ -307,6 +313,7 @@ class UserResourceIT {
         managedUserVM.setFirstName(UPDATED_FIRSTNAME);
         managedUserVM.setLastName(UPDATED_LASTNAME);
         managedUserVM.setEmail(UPDATED_EMAIL);
+        managedUserVM.setBirthDate("2003-06-03");
         managedUserVM.setActivated(updatedUser.isActivated());
         managedUserVM.setImageUrl(UPDATED_IMAGEURL);
         managedUserVM.setLangKey(UPDATED_LANGKEY);
@@ -355,6 +362,7 @@ class UserResourceIT {
         managedUserVM.setFirstName(UPDATED_FIRSTNAME);
         managedUserVM.setLastName(UPDATED_LASTNAME);
         managedUserVM.setEmail(UPDATED_EMAIL);
+        managedUserVM.setBirthDate("2003-06-03");
         managedUserVM.setActivated(updatedUser.isActivated());
         managedUserVM.setImageUrl(UPDATED_IMAGEURL);
         managedUserVM.setLangKey(UPDATED_LANGKEY);
@@ -401,6 +409,7 @@ class UserResourceIT {
         anotherUser.setFirstName("java");
         anotherUser.setLastName("hipster");
         anotherUser.setImageUrl("");
+        anotherUser.setBirthDate(new SimpleDateFormat(DATE_FORMAT).parse("2003-06-20"));
         anotherUser.setLangKey("en");
         userRepository.save(anotherUser).block();
 
@@ -414,6 +423,7 @@ class UserResourceIT {
         managedUserVM.setFirstName(updatedUser.getFirstName());
         managedUserVM.setLastName(updatedUser.getLastName());
         managedUserVM.setEmail("jhipster@localhost"); // this email should already be used by anotherUser
+        managedUserVM.setBirthDate("2003-06-20");
         managedUserVM.setActivated(updatedUser.isActivated());
         managedUserVM.setImageUrl(updatedUser.getImageUrl());
         managedUserVM.setLangKey(updatedUser.getLangKey());
@@ -443,6 +453,7 @@ class UserResourceIT {
         anotherUser.setPassword(RandomStringUtils.random(60));
         anotherUser.setActivated(true);
         anotherUser.setEmail("jhipster@localhost");
+        anotherUser.setBirthDate(new SimpleDateFormat(DATE_FORMAT).parse("2003-06-20"));
         anotherUser.setFirstName("java");
         anotherUser.setLastName("hipster");
         anotherUser.setImageUrl("");
@@ -459,6 +470,7 @@ class UserResourceIT {
         managedUserVM.setFirstName(updatedUser.getFirstName());
         managedUserVM.setLastName(updatedUser.getLastName());
         managedUserVM.setEmail(updatedUser.getEmail());
+        managedUserVM.setBirthDate("2003-06-20");
         managedUserVM.setActivated(updatedUser.isActivated());
         managedUserVM.setImageUrl(updatedUser.getImageUrl());
         managedUserVM.setLangKey(updatedUser.getLangKey());
@@ -519,6 +531,7 @@ class UserResourceIT {
         userDTO.setFirstName(DEFAULT_FIRSTNAME);
         userDTO.setLastName(DEFAULT_LASTNAME);
         userDTO.setEmail(DEFAULT_EMAIL);
+        userDTO.setBirthDate("2003-06-20");
         userDTO.setActivated(true);
         userDTO.setImageUrl(DEFAULT_IMAGEURL);
         userDTO.setLangKey(DEFAULT_LANGKEY);

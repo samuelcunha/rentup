@@ -1,5 +1,6 @@
 package com.rentup.app.web.rest;
 
+import static com.rentup.app.domain.util.DateUtil.DATE_FORMAT;
 import static com.rentup.app.web.rest.AccountResourceIT.TEST_USER_LOGIN;
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -12,9 +13,10 @@ import com.rentup.app.security.AuthoritiesConstants;
 import com.rentup.app.service.UserService;
 import com.rentup.app.service.dto.AdminUserDTO;
 import com.rentup.app.service.dto.PasswordChangeDTO;
-import com.rentup.app.service.dto.UserDTO;
 import com.rentup.app.web.rest.vm.KeyAndPasswordVM;
 import com.rentup.app.web.rest.vm.ManagedUserVM;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.Instant;
 import java.util.*;
 import org.apache.commons.lang3.RandomStringUtils;
@@ -96,6 +98,7 @@ class AccountResourceIT {
         user.setLastName("doe");
         user.setEmail("john.doe@jhipster.com");
         user.setImageUrl("http://placehold.it/50x50");
+        user.setBirthDate("2003-06-20");
         user.setLangKey("en");
         user.setAuthorities(authorities);
         userService.createUser(user).block();
@@ -145,6 +148,7 @@ class AccountResourceIT {
         validUser.setFirstName("Alice");
         validUser.setLastName("Test");
         validUser.setEmail("test-register-valid@example.com");
+        validUser.setBirthDate("2003-06-20");
         validUser.setImageUrl("http://placehold.it/50x50");
         validUser.setLangKey(Constants.DEFAULT_LANGUAGE);
         validUser.setAuthorities(Collections.singleton(AuthoritiesConstants.USER));
@@ -276,6 +280,7 @@ class AccountResourceIT {
         firstUser.setLastName("Something");
         firstUser.setEmail("alice@example.com");
         firstUser.setImageUrl("http://placehold.it/50x50");
+        firstUser.setBirthDate("2003-06-20");
         firstUser.setLangKey(Constants.DEFAULT_LANGUAGE);
         firstUser.setAuthorities(Collections.singleton(AuthoritiesConstants.USER));
 
@@ -286,6 +291,7 @@ class AccountResourceIT {
         secondUser.setFirstName(firstUser.getFirstName());
         secondUser.setLastName(firstUser.getLastName());
         secondUser.setEmail("alice2@example.com");
+        secondUser.setBirthDate("2003-06-20");
         secondUser.setImageUrl(firstUser.getImageUrl());
         secondUser.setLangKey(firstUser.getLangKey());
         secondUser.setCreatedBy(firstUser.getCreatedBy());
@@ -340,6 +346,7 @@ class AccountResourceIT {
         firstUser.setLastName("Test");
         firstUser.setEmail("test-register-duplicate-email@example.com");
         firstUser.setImageUrl("http://placehold.it/50x50");
+        firstUser.setBirthDate("2003-06-20");
         firstUser.setLangKey(Constants.DEFAULT_LANGUAGE);
         firstUser.setAuthorities(Collections.singleton(AuthoritiesConstants.USER));
 
@@ -363,6 +370,7 @@ class AccountResourceIT {
         secondUser.setFirstName(firstUser.getFirstName());
         secondUser.setLastName(firstUser.getLastName());
         secondUser.setEmail(firstUser.getEmail());
+        secondUser.setBirthDate("2003-06-20");
         secondUser.setImageUrl(firstUser.getImageUrl());
         secondUser.setLangKey(firstUser.getLangKey());
         secondUser.setAuthorities(new HashSet<>(firstUser.getAuthorities()));
@@ -391,6 +399,7 @@ class AccountResourceIT {
         userWithUpperCaseEmail.setFirstName(firstUser.getFirstName());
         userWithUpperCaseEmail.setLastName(firstUser.getLastName());
         userWithUpperCaseEmail.setEmail("TEST-register-duplicate-email@example.com");
+        userWithUpperCaseEmail.setBirthDate("2003-06-20");
         userWithUpperCaseEmail.setImageUrl(firstUser.getImageUrl());
         userWithUpperCaseEmail.setLangKey(firstUser.getLangKey());
         userWithUpperCaseEmail.setAuthorities(new HashSet<>(firstUser.getAuthorities()));
@@ -433,6 +442,7 @@ class AccountResourceIT {
         validUser.setEmail("badguy@example.com");
         validUser.setActivated(true);
         validUser.setImageUrl("http://placehold.it/50x50");
+        validUser.setBirthDate("2003-06-20");
         validUser.setLangKey(Constants.DEFAULT_LANGUAGE);
         validUser.setAuthorities(Collections.singleton(AuthoritiesConstants.ADMIN));
 
@@ -453,11 +463,12 @@ class AccountResourceIT {
     }
 
     @Test
-    void testActivateAccount() {
+    void testActivateAccount() throws ParseException {
         final String activationKey = "some activation key";
         User user = new User();
         user.setLogin("activate-account");
         user.setEmail("activate-account@example.com");
+        user.setBirthDate(new SimpleDateFormat(DATE_FORMAT).parse("2003-06-20"));
         user.setPassword(RandomStringUtils.random(60));
         user.setActivated(false);
         user.setActivationKey(activationKey);
@@ -487,6 +498,7 @@ class AccountResourceIT {
         user.setLogin("save-account");
         user.setEmail("save-account@example.com");
         user.setPassword(RandomStringUtils.random(60));
+        user.setBirthDate(new SimpleDateFormat(DATE_FORMAT).parse("2003-06-20"));
         user.setActivated(true);
         userRepository.save(user).block();
 
@@ -495,6 +507,7 @@ class AccountResourceIT {
         userDTO.setFirstName("firstname");
         userDTO.setLastName("lastname");
         userDTO.setEmail("save-account@example.com");
+        userDTO.setBirthDate("2003-06-20");
         userDTO.setActivated(false);
         userDTO.setImageUrl("http://placehold.it/50x50");
         userDTO.setLangKey(Constants.DEFAULT_LANGUAGE);
@@ -526,6 +539,7 @@ class AccountResourceIT {
         User user = new User();
         user.setLogin("save-invalid-email");
         user.setEmail("save-invalid-email@example.com");
+        user.setBirthDate(new SimpleDateFormat(DATE_FORMAT).parse("2003-06-20"));
         user.setPassword(RandomStringUtils.random(60));
         user.setActivated(true);
 
@@ -539,6 +553,7 @@ class AccountResourceIT {
         userDTO.setActivated(false);
         userDTO.setImageUrl("http://placehold.it/50x50");
         userDTO.setLangKey(Constants.DEFAULT_LANGUAGE);
+        userDTO.setBirthDate("2003-06-20");
         userDTO.setAuthorities(Collections.singleton(AuthoritiesConstants.ADMIN));
 
         accountWebTestClient
@@ -561,11 +576,13 @@ class AccountResourceIT {
         user.setEmail("save-existing-email@example.com");
         user.setPassword(RandomStringUtils.random(60));
         user.setActivated(true);
+        user.setBirthDate(new SimpleDateFormat(DATE_FORMAT).parse("2003-06-20"));
         userRepository.save(user).block();
 
         User anotherUser = new User();
         anotherUser.setLogin("save-existing-email2");
         anotherUser.setEmail("save-existing-email2@example.com");
+        anotherUser.setBirthDate(new SimpleDateFormat(DATE_FORMAT).parse("2003-06-20"));
         anotherUser.setPassword(RandomStringUtils.random(60));
         anotherUser.setActivated(true);
 
@@ -579,6 +596,7 @@ class AccountResourceIT {
         userDTO.setActivated(false);
         userDTO.setImageUrl("http://placehold.it/50x50");
         userDTO.setLangKey(Constants.DEFAULT_LANGUAGE);
+        userDTO.setBirthDate("2003-06-20");
         userDTO.setAuthorities(Collections.singleton(AuthoritiesConstants.ADMIN));
 
         accountWebTestClient
@@ -602,6 +620,7 @@ class AccountResourceIT {
         user.setEmail("save-existing-email-and-login@example.com");
         user.setPassword(RandomStringUtils.random(60));
         user.setActivated(true);
+        user.setBirthDate(new SimpleDateFormat(DATE_FORMAT).parse("2003-06-20"));
         userRepository.save(user).block();
 
         AdminUserDTO userDTO = new AdminUserDTO();
@@ -611,6 +630,7 @@ class AccountResourceIT {
         userDTO.setEmail("save-existing-email-and-login@example.com");
         userDTO.setActivated(false);
         userDTO.setImageUrl("http://placehold.it/50x50");
+        userDTO.setBirthDate("2003-06-20");
         userDTO.setLangKey(Constants.DEFAULT_LANGUAGE);
         userDTO.setAuthorities(Collections.singleton(AuthoritiesConstants.ADMIN));
 
@@ -635,6 +655,7 @@ class AccountResourceIT {
         user.setPassword(passwordEncoder.encode(currentPassword));
         user.setLogin("change-password-wrong-existing-password");
         user.setEmail("change-password-wrong-existing-password@example.com");
+        user.setBirthDate(new SimpleDateFormat(DATE_FORMAT).parse("2003-06-20"));
         userRepository.save(user).block();
 
         accountWebTestClient
@@ -659,6 +680,7 @@ class AccountResourceIT {
         user.setPassword(passwordEncoder.encode(currentPassword));
         user.setLogin("change-password");
         user.setEmail("change-password@example.com");
+        user.setBirthDate(new SimpleDateFormat(DATE_FORMAT).parse("2003-06-20"));
         userRepository.save(user).block();
 
         accountWebTestClient
@@ -682,6 +704,7 @@ class AccountResourceIT {
         user.setPassword(passwordEncoder.encode(currentPassword));
         user.setLogin("change-password-too-small");
         user.setEmail("change-password-too-small@example.com");
+        user.setBirthDate(new SimpleDateFormat(DATE_FORMAT).parse("2003-06-20"));
         userRepository.save(user).block();
 
         String newPassword = RandomStringUtils.random(ManagedUserVM.PASSWORD_MIN_LENGTH - 1);
@@ -707,6 +730,7 @@ class AccountResourceIT {
         user.setPassword(passwordEncoder.encode(currentPassword));
         user.setLogin("change-password-too-long");
         user.setEmail("change-password-too-long@example.com");
+        user.setBirthDate(new SimpleDateFormat(DATE_FORMAT).parse("2003-06-20"));
         userRepository.save(user).block();
 
         String newPassword = RandomStringUtils.random(ManagedUserVM.PASSWORD_MAX_LENGTH + 1);
@@ -732,6 +756,7 @@ class AccountResourceIT {
         user.setPassword(passwordEncoder.encode(currentPassword));
         user.setLogin("change-password-empty");
         user.setEmail("change-password-empty@example.com");
+        user.setBirthDate(new SimpleDateFormat(DATE_FORMAT).parse("2003-06-20"));
         userRepository.save(user).block();
 
         accountWebTestClient
@@ -748,12 +773,13 @@ class AccountResourceIT {
     }
 
     @Test
-    void testRequestPasswordReset() {
+    void testRequestPasswordReset() throws ParseException {
         User user = new User();
         user.setPassword(RandomStringUtils.random(60));
         user.setActivated(true);
         user.setLogin("password-reset");
         user.setEmail("password-reset@example.com");
+        user.setBirthDate(new SimpleDateFormat(DATE_FORMAT).parse("2003-06-20"));
         userRepository.save(user).block();
 
         accountWebTestClient
@@ -766,12 +792,13 @@ class AccountResourceIT {
     }
 
     @Test
-    void testRequestPasswordResetUpperCaseEmail() {
+    void testRequestPasswordResetUpperCaseEmail() throws ParseException {
         User user = new User();
         user.setPassword(RandomStringUtils.random(60));
         user.setActivated(true);
         user.setLogin("password-reset-upper-case");
         user.setEmail("password-reset-upper-case@example.com");
+        user.setBirthDate(new SimpleDateFormat(DATE_FORMAT).parse("2003-06-20"));
         userRepository.save(user).block();
 
         accountWebTestClient
@@ -800,6 +827,7 @@ class AccountResourceIT {
         user.setPassword(RandomStringUtils.random(60));
         user.setLogin("finish-password-reset");
         user.setEmail("finish-password-reset@example.com");
+        user.setBirthDate(new SimpleDateFormat(DATE_FORMAT).parse("2003-06-20"));
         user.setResetDate(Instant.now().plusSeconds(60));
         user.setResetKey("reset key");
         userRepository.save(user).block();
@@ -827,6 +855,7 @@ class AccountResourceIT {
         user.setPassword(RandomStringUtils.random(60));
         user.setLogin("finish-password-reset-too-small");
         user.setEmail("finish-password-reset-too-small@example.com");
+        user.setBirthDate(new SimpleDateFormat(DATE_FORMAT).parse("2003-06-20"));
         user.setResetDate(Instant.now().plusSeconds(60));
         user.setResetKey("reset key too small");
         userRepository.save(user).block();
