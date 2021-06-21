@@ -1,5 +1,6 @@
 package com.rentup.app.service;
 
+import static com.rentup.app.domain.util.DateUtil.DATE_FORMAT;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import com.rentup.app.IntegrationTest;
@@ -7,6 +8,8 @@ import com.rentup.app.config.Constants;
 import com.rentup.app.domain.User;
 import com.rentup.app.repository.UserRepository;
 import com.rentup.app.service.dto.AdminUserDTO;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
@@ -45,13 +48,14 @@ class UserServiceIT {
     private User user;
 
     @BeforeEach
-    public void init() {
+    public void init() throws ParseException {
         userRepository.deleteAll().block();
         user = new User();
         user.setLogin(DEFAULT_LOGIN);
         user.setPassword(RandomStringUtils.random(60));
         user.setActivated(true);
         user.setEmail(DEFAULT_EMAIL);
+        user.setBirthDate(new SimpleDateFormat(DATE_FORMAT).parse("2003-06-20"));
         user.setFirstName(DEFAULT_FIRSTNAME);
         user.setLastName(DEFAULT_LASTNAME);
         user.setImageUrl(DEFAULT_IMAGEURL);

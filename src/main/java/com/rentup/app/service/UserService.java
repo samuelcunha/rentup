@@ -1,8 +1,11 @@
 package com.rentup.app.service;
 
+import static com.rentup.app.service.mapper.AddressMapper.addressDTOToAddress;
+
 import com.rentup.app.config.Constants;
 import com.rentup.app.domain.Authority;
 import com.rentup.app.domain.User;
+import com.rentup.app.domain.util.DateUtil;
 import com.rentup.app.repository.AuthorityRepository;
 import com.rentup.app.repository.UserRepository;
 import com.rentup.app.security.AuthoritiesConstants;
@@ -11,7 +14,8 @@ import com.rentup.app.service.dto.AdminUserDTO;
 import com.rentup.app.service.dto.UserDTO;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
-import java.util.*;
+import java.util.HashSet;
+import java.util.Set;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Pageable;
@@ -127,6 +131,8 @@ public class UserService {
                             newUser.setEmail(userDTO.getEmail().toLowerCase());
                         }
                         newUser.setImageUrl(userDTO.getImageUrl());
+                        newUser.setBirthDate(DateUtil.toDateAndValidateLegalAge(userDTO.getBirthDate()));
+                        newUser.setAddress(addressDTOToAddress(userDTO.getAddress()));
                         newUser.setLangKey(userDTO.getLangKey());
                         // new user is not active
                         newUser.setActivated(false);
@@ -159,6 +165,8 @@ public class UserService {
             user.setEmail(userDTO.getEmail().toLowerCase());
         }
         user.setImageUrl(userDTO.getImageUrl());
+        user.setBirthDate(DateUtil.toDateAndValidateLegalAge(userDTO.getBirthDate()));
+        user.setAddress(addressDTOToAddress(userDTO.getAddress()));
         if (userDTO.getLangKey() == null) {
             user.setLangKey(Constants.DEFAULT_LANGUAGE); // default language
         } else {
@@ -202,6 +210,8 @@ public class UserService {
                         user.setEmail(userDTO.getEmail().toLowerCase());
                     }
                     user.setImageUrl(userDTO.getImageUrl());
+                    user.setAddress(addressDTOToAddress(userDTO.getAddress()));
+                    user.setBirthDate(DateUtil.toDateAndValidateLegalAge(userDTO.getBirthDate()));
                     user.setActivated(userDTO.isActivated());
                     user.setLangKey(userDTO.getLangKey());
                     Set<Authority> managedAuthorities = user.getAuthorities();

@@ -1,12 +1,18 @@
 package com.rentup.app.service.dto;
 
+import static com.rentup.app.service.mapper.AddressMapper.addressToAddressDTO;
+
 import com.rentup.app.config.Constants;
 import com.rentup.app.domain.Authority;
 import com.rentup.app.domain.User;
+import com.rentup.app.domain.util.DateUtil;
 import java.time.Instant;
 import java.util.Set;
 import java.util.stream.Collectors;
-import javax.validation.constraints.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
 /**
  * A DTO representing a user, with his authorities.
@@ -48,6 +54,10 @@ public class AdminUserDTO {
 
     private Set<String> authorities;
 
+    private String birthDate;
+
+    private AddressDTO address;
+
     public AdminUserDTO() {
         // Empty constructor needed for Jackson.
     }
@@ -61,6 +71,8 @@ public class AdminUserDTO {
         this.activated = user.isActivated();
         this.imageUrl = user.getImageUrl();
         this.langKey = user.getLangKey();
+        this.birthDate = DateUtil.toDateWithDefaultFormat(user.getBirthDate());
+        this.address = addressToAddressDTO(user.getAddress());
         this.createdBy = user.getCreatedBy();
         this.createdDate = user.getCreatedDate();
         this.lastModifiedBy = user.getLastModifiedBy();
@@ -170,6 +182,22 @@ public class AdminUserDTO {
 
     public void setAuthorities(Set<String> authorities) {
         this.authorities = authorities;
+    }
+
+    public String getBirthDate() {
+        return birthDate;
+    }
+
+    public void setBirthDate(String birthDate) {
+        this.birthDate = birthDate;
+    }
+
+    public AddressDTO getAddress() {
+        return address;
+    }
+
+    public void setAddress(AddressDTO address) {
+        this.address = address;
     }
 
     // prettier-ignore
