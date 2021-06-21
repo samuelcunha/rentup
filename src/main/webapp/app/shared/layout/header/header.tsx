@@ -1,65 +1,57 @@
 import './header.scss';
 
-import React, { useState } from 'react';
-import { Translate, Storage } from 'react-jhipster';
-import { Navbar, Nav, NavbarToggler, Collapse } from 'reactstrap';
+import React from 'react';
 
 import LoadingBar from 'react-redux-loading-bar';
 
-import { Home, Brand } from './header-components';
-import { AdminMenu, EntitiesMenu, AccountMenu, LocaleMenu } from '../menus';
+import { AppBar, IconButton, makeStyles, Toolbar, Typography } from '@material-ui/core';
+import MenuIcon from '@material-ui/icons/Menu';
+import { connect } from 'react-redux';
 
-export interface IHeaderProps {
-  isAuthenticated: boolean;
-  isAdmin: boolean;
-  ribbonEnv: string;
-  isInProduction: boolean;
-  isOpenAPIEnabled: boolean;
-  currentLocale: string;
-  onLocaleChange: (langKey: string) => void;
-}
+const useStyles = makeStyles(theme => ({
+  root: {
+    flexGrow: 1,
+    position: 'fixed',
+    top: 0,
+    width: '100%',
+    zIndex: 999,
+  },
+  menuButton: {
+    marginRight: theme.spacing(2),
+  },
+  title: {
+    flexGrow: 1,
+  },
+}));
 
-const Header = (props: IHeaderProps) => {
-  const [menuOpen, setMenuOpen] = useState(false);
-
-  const handleLocaleChange = event => {
-    const langKey = event.target.value;
-    Storage.session.set('locale', langKey);
-    props.onLocaleChange(langKey);
-  };
-
-  const renderDevRibbon = () =>
-    props.isInProduction === false ? (
-      <div className="ribbon dev">
-        <a href="">
-          <Translate contentKey={`global.ribbon.${props.ribbonEnv}`} />
-        </a>
-      </div>
-    ) : null;
-
-  const toggleMenu = () => setMenuOpen(!menuOpen);
-
-  /* jhipster-needle-add-element-to-menu - JHipster will add new menu items here */
+const Header = props => {
+  const classes = useStyles();
 
   return (
-    <div id="app-header">
-      {renderDevRibbon()}
-      <LoadingBar className="loading-bar" />
-      <Navbar data-cy="navbar" dark expand="sm" fixed="top" className="jh-navbar">
-        <NavbarToggler aria-label="Menu" onClick={toggleMenu} />
-        <Brand />
-        <Collapse isOpen={menuOpen} navbar>
-          <Nav id="header-tabs" className="ml-auto" navbar>
-            <Home />
-            {props.isAuthenticated && <EntitiesMenu />}
-            {props.isAuthenticated && props.isAdmin && <AdminMenu showOpenAPI={props.isOpenAPIEnabled} />}
-            <LocaleMenu currentLocale={props.currentLocale} onClick={handleLocaleChange} />
-            <AccountMenu isAuthenticated={props.isAuthenticated} />
-          </Nav>
-        </Collapse>
-      </Navbar>
+    <div className={classes.root}>
+      <AppBar position="static">
+        <LoadingBar className="loading-bar" />
+        <Toolbar>
+          {props.isAuthenticated && (
+            <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
+              <MenuIcon />
+            </IconButton>
+          )}
+
+          <Typography variant="h6" className={classes.title}>
+            {props.title}
+          </Typography>
+        </Toolbar>
+      </AppBar>
     </div>
   );
 };
 
-export default Header;
+export const mapStateToProps = ({ authentication }) => {
+  return {
+    account: authentication.account,
+    isAuthenticated: authentication.isAuthenticated,
+  };
+};
+
+export default connect(mapStateToProps)(Header);

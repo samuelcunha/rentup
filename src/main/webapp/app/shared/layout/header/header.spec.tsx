@@ -4,44 +4,31 @@ import { Provider } from 'react-redux';
 import { Router } from 'react-router-dom';
 import { createMemoryHistory } from 'history';
 
-import sinon from 'sinon';
-
 import initStore from 'app/config/store';
 import Header from './header';
+import { ACTION_TYPES } from 'app/shared/reducers/authentication';
+import { SUCCESS } from '../../reducers/action-type.util';
 
 describe('Header', () => {
   let mountedWrapper;
 
-  const localeSpy = sinon.spy();
-
-  const devProps = {
-    isAuthenticated: true,
-    isAdmin: true,
-    currentLocale: 'en',
-    onLocaleChange: localeSpy,
-    ribbonEnv: 'dev',
-    isInProduction: false,
-    isOpenAPIEnabled: true,
-  };
-  const prodProps = {
-    ...devProps,
-    ribbonEnv: 'prod',
-    isInProduction: true,
-    isOpenAPIEnabled: false,
-  };
-  const userProps = {
-    ...prodProps,
-    isAdmin: false,
-  };
-  const guestProps = {
-    ...prodProps,
-    isAdmin: false,
-    isAuthenticated: false,
+  const headerProps = {
+    title: 'Custom Title',
+    authenticated: false,
   };
 
-  const wrapper = (props = devProps) => {
+  const headerPropsAuthenticated = {
+    title: 'Custom Title',
+    authenticated: true,
+  };
+
+  const wrapper = (props = headerProps) => {
     if (!mountedWrapper) {
       const store = initStore();
+      if (props.authenticated) {
+        const payload = { data: { activated: true } };
+        store.dispatch({ type: SUCCESS(ACTION_TYPES.GET_SESSION), payload });
+      }
       const history = createMemoryHistory();
       const { container } = render(
         <Provider store={store}>
@@ -59,60 +46,18 @@ describe('Header', () => {
     mountedWrapper = undefined;
   });
 
-  // All tests will go here
-  it('Renders a Header component in dev profile with LoadingBar, Navbar, Nav and dev ribbon.', () => {
+  it('Renders a Header component', () => {
     const html = wrapper();
-
-    // Find Navbar component
-    expect(html).toContain('navbar');
-    // Find AdminMenu component
-    expect(html).toContain('admin-menu');
-    // Find EntitiesMenu component
-    expect(html).toContain('entity-menu');
-    // Find AccountMenu component
-    expect(html).toContain('account-menu');
-    // Ribbon
-    expect(html).toContain('ribbon');
+    expect(html).toContain('header');
   });
 
-  it('Renders a Header component in prod profile with LoadingBar, Navbar, Nav.', () => {
-    const html = wrapper(prodProps);
-
-    // Find Navbar component
-    expect(html).toContain('navbar');
-    // Find AdminMenu component
-    expect(html).toContain('admin-menu');
-    // Find EntitiesMenu component
-    expect(html).toContain('entity-menu');
-    // Find AccountMenu component
-    expect(html).toContain('account-menu');
-    // No Ribbon
-    expect(html).not.toContain('ribbon');
+  it('Set header title property', () => {
+    const html = wrapper();
+    expect(html).toContain('Custom Title');
   });
 
-  it('Renders a Header component in prod profile with logged in User', () => {
-    const html = wrapper(userProps);
-
-    // Find Navbar component
-    expect(html).toContain('navbar');
-    // Not find AdminMenu component
-    expect(html).not.toContain('admin-menu');
-    // Find EntitiesMenu component
-    expect(html).toContain('entity-menu');
-    // Find AccountMenu component
-    expect(html).toContain('account-menu');
-  });
-
-  it('Renders a Header component in prod profile with no logged in User', () => {
-    const html = wrapper(guestProps);
-
-    // Find Navbar component
-    expect(html).toContain('navbar');
-    // Not find AdminMenu component
-    expect(html).not.toContain('admin-menu');
-    // Not find EntitiesMenu component
-    expect(html).not.toContain('entity-menu');
-    // Find AccountMenu component
-    expect(html).toContain('account-menu');
+  it('Show menu if authenticated', () => {
+    const html = wrapper(headerPropsAuthenticated);
+    expect(html).toContain('menu');
   });
 });
