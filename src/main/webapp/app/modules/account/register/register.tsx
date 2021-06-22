@@ -80,7 +80,6 @@ export const RegisterPage = props => {
     }
     return helperText;
   };
-  console.log(props);
   if (props.register.registrationSuccess) {
     return <Redirect to="/login" />;
   }
