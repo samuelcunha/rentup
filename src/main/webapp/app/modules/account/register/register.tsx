@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import { IRootState } from 'app/shared/reducers';
 import Header from '../../../shared/layout/header/header';
@@ -10,6 +10,7 @@ import { handleRegister } from './register.reducer';
 import { reset } from '../../administration/user-management/user-management.reducer';
 import { connect } from 'react-redux';
 import { format } from 'date-fns';
+import { Redirect } from 'react-router-dom';
 
 const useStyles = makeStyles(theme => ({
   container: {
@@ -39,6 +40,13 @@ const useStyles = makeStyles(theme => ({
 }));
 
 export const RegisterPage = props => {
+  useEffect(() => {
+    props.reset();
+    props.register.registrationSuccess = false;
+    return () => {
+      props.reset();
+    };
+  }, []);
   const classes = useStyles();
   const {
     register,
@@ -72,6 +80,10 @@ export const RegisterPage = props => {
     }
     return helperText;
   };
+  console.log(props);
+  if (props.register.registrationSuccess) {
+    return <Redirect to="/login" />;
+  }
 
   return (
     <Container disableGutters maxWidth={false}>
@@ -83,9 +95,9 @@ export const RegisterPage = props => {
               <Grid item container spacing={1} xs={12} md={6} lg={3} justify="center">
                 <Grid item xs={12} lg={12}>
                   <TextField
-                    {...register('username', { required: true, maxLength: 50 })}
-                    error={!!errors.username}
-                    helperText={errors?.username?.type === 'required' && 'Usuário é obrigatório'}
+                    {...register('login', { required: true, maxLength: 50 })}
+                    error={!!errors.login}
+                    helperText={errors?.login?.type === 'required' && 'Usuário é obrigatório'}
                     label="Usuário"
                     required
                     fullWidth
@@ -103,13 +115,13 @@ export const RegisterPage = props => {
                 </Grid>
                 <Grid item xs={12} lg={12}>
                   <TextField
-                    {...register('firstPassword', {
+                    {...register('password', {
                       required: true,
                       maxLength: 15,
-                      validate: () => getValues('firstPassword') === getValues('secondPassword'),
+                      validate: () => getValues('password') === getValues('passwordConfirm'),
                     })}
-                    error={!!errors.firstPassword}
-                    helperText={getPasswordHelperText(errors?.firstPassword?.type)}
+                    error={!!errors.password}
+                    helperText={getPasswordHelperText(errors?.password?.type)}
                     required
                     label="Senha"
                     type="password"
@@ -118,13 +130,13 @@ export const RegisterPage = props => {
                 </Grid>
                 <Grid item xs={12} lg={12}>
                   <TextField
-                    {...register('secondPassword', {
+                    {...register('passwordConfirm', {
                       required: true,
                       maxLength: 15,
-                      validate: () => getValues('firstPassword') === getValues('secondPassword'),
+                      validate: () => getValues('password') === getValues('passwordConfirm'),
                     })}
-                    error={!!errors.secondPassword}
-                    helperText={getPasswordHelperText(errors?.firstPassword?.type)}
+                    error={!!errors.passwordConfirm}
+                    helperText={getPasswordHelperText(errors?.password?.type)}
                     required
                     label="Confirmação da senha"
                     type="password"
@@ -239,12 +251,11 @@ export const RegisterPage = props => {
   );
 };
 
-const mapStateToProps = ({ locale }: IRootState) => ({
+const mapStateToProps = ({ locale, register }: IRootState) => ({
   currentLocale: locale.currentLocale,
+  register,
 });
 
 const mapDispatchToProps = { handleRegister, reset };
-type StateProps = ReturnType<typeof mapStateToProps>;
-type DispatchProps = typeof mapDispatchToProps;
 
 export default connect(mapStateToProps, mapDispatchToProps)(RegisterPage);
