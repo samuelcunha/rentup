@@ -9,6 +9,7 @@ import java.util.Collections;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.mock.http.server.reactive.MockServerHttpRequest;
+import org.springframework.mock.http.server.reactive.MockServerHttpRequest.BaseBuilder;
 import org.springframework.mock.web.server.MockServerWebExchange;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -21,13 +22,12 @@ import tech.jhipster.config.JHipsterProperties;
 class JWTFilterTest {
 
     private TokenProvider tokenProvider;
-
     private JWTFilter jwtFilter;
 
     @BeforeEach
     public void setup() {
-        JHipsterProperties jHipsterProperties = new JHipsterProperties();
-        String base64Secret = "fd54a45s65fds737b9aafcb3412e07ed99b267f33413274720ddbb7f6c5e64e9f14075f2d7ed041592f0b7657baf8";
+        var jHipsterProperties = new JHipsterProperties();
+        var base64Secret = "fd54a45s65fds737b9aafcb3412e07ed99b267f33413274720ddbb7f6c5e64e9f14075f2d7ed041592f0b7657baf8";
         jHipsterProperties.getSecurity().getAuthentication().getJwt().setBase64Secret(base64Secret);
         tokenProvider = new TokenProvider(jHipsterProperties);
         ReflectionTestUtils.setField(tokenProvider, "key", Keys.hmacShaKeyFor(Decoders.BASE64.decode(base64Secret)));
@@ -38,16 +38,14 @@ class JWTFilterTest {
 
     @Test
     void testJWTFilter() {
-        UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
+        var authentication = new UsernamePasswordAuthenticationToken(
             "test-user",
             "test-password",
             Collections.singletonList(new SimpleGrantedAuthority(AuthoritiesConstants.USER))
         );
-        String jwt = tokenProvider.createToken(authentication, false);
-        MockServerHttpRequest.BaseBuilder request = MockServerHttpRequest
-            .get("/api/test")
-            .header(JWTFilter.AUTHORIZATION_HEADER, "Bearer " + jwt);
-        MockServerWebExchange exchange = MockServerWebExchange.from(request);
+        var jwt = tokenProvider.createToken(authentication, false);
+        var request = MockServerHttpRequest.get("/api/test").header(JWTFilter.AUTHORIZATION_HEADER, "Bearer " + jwt);
+        var exchange = MockServerWebExchange.from(request);
         jwtFilter
             .filter(
                 exchange,
@@ -65,11 +63,9 @@ class JWTFilterTest {
 
     @Test
     void testJWTFilterInvalidToken() {
-        String jwt = "wrong_jwt";
-        MockServerHttpRequest.BaseBuilder request = MockServerHttpRequest
-            .get("/api/test")
-            .header(JWTFilter.AUTHORIZATION_HEADER, "Bearer " + jwt);
-        MockServerWebExchange exchange = MockServerWebExchange.from(request);
+        var jwt = "wrong_jwt";
+        var request = MockServerHttpRequest.get("/api/test").header(JWTFilter.AUTHORIZATION_HEADER, "Bearer " + jwt);
+        var exchange = MockServerWebExchange.from(request);
         jwtFilter
             .filter(
                 exchange,
@@ -86,8 +82,8 @@ class JWTFilterTest {
 
     @Test
     void testJWTFilterMissingAuthorization() {
-        MockServerHttpRequest.BaseBuilder request = MockServerHttpRequest.get("/api/test");
-        MockServerWebExchange exchange = MockServerWebExchange.from(request);
+        var request = MockServerHttpRequest.get("/api/test");
+        var exchange = MockServerWebExchange.from(request);
         jwtFilter
             .filter(
                 exchange,
@@ -104,10 +100,8 @@ class JWTFilterTest {
 
     @Test
     void testJWTFilterMissingToken() {
-        MockServerHttpRequest.BaseBuilder request = MockServerHttpRequest
-            .get("/api/test")
-            .header(JWTFilter.AUTHORIZATION_HEADER, "Bearer ");
-        MockServerWebExchange exchange = MockServerWebExchange.from(request);
+        var request = MockServerHttpRequest.get("/api/test").header(JWTFilter.AUTHORIZATION_HEADER, "Bearer ");
+        var exchange = MockServerWebExchange.from(request);
         jwtFilter
             .filter(
                 exchange,
@@ -124,16 +118,14 @@ class JWTFilterTest {
 
     @Test
     void testJWTFilterWrongScheme() {
-        UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
+        var authentication = new UsernamePasswordAuthenticationToken(
             "test-user",
             "test-password",
             Collections.singletonList(new SimpleGrantedAuthority(AuthoritiesConstants.USER))
         );
-        String jwt = tokenProvider.createToken(authentication, false);
-        MockServerHttpRequest.BaseBuilder request = MockServerHttpRequest
-            .get("/api/test")
-            .header(JWTFilter.AUTHORIZATION_HEADER, "Basic " + jwt);
-        MockServerWebExchange exchange = MockServerWebExchange.from(request);
+        var jwt = tokenProvider.createToken(authentication, false);
+        var request = MockServerHttpRequest.get("/api/test").header(JWTFilter.AUTHORIZATION_HEADER, "Basic " + jwt);
+        var exchange = MockServerWebExchange.from(request);
         jwtFilter
             .filter(
                 exchange,
