@@ -23,7 +23,7 @@ class ArchTest {
             .should()
             .dependOnClassesThat()
             .resideInAnyPackage("..com.rentup.app.web..")
-            .because("Services and repositories should not depend on web layer")
+            .because("Services and repositories should not depend on API Layer")
             .check(importedClasses);
     }
 }
