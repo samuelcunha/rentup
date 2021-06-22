@@ -95,7 +95,7 @@ module.exports = options =>
       plugins: [
         new webpack.DefinePlugin({
           'process.env': {
-            NODE_ENV: `'${options.env}'`,
+            NODE_ENV: JSON.stringify(options.env),
             BUILD_TIMESTAMP: `'${new Date().getTime()}'`,
             // APP_VERSION is passed as an environment variable from the Gradle / Maven build tasks.
             VERSION: `'${process.env.hasOwnProperty('APP_VERSION') ? process.env.APP_VERSION : 'DEV'}'`,
