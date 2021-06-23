@@ -56,7 +56,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "    {\n        \"login\": \"testeEmailReal\",\n        \"firstName\": \"Teste\",\n        \"lastName\": \"Postman\",\n        \"email\": \"fabio.norbt@gmail.com\",\n        \"imageUrl\": null,\n        \"activated\": true,\n        \"langKey\": \"pt-br\",\n        \"authorities\": [\n            \"ROLE_USER\",\n            \"ROLE_ADMIN\"\n        ],\n        \"address\": {\n            \"street\": \"Rua Jesus\",\n            \"city\": \"Belo Horizonte\",\n            \"state\": \"MG\",\n            \"country\": \"Brazil\",\n            \"complement\": \"Apto 102\",\n            \"number\": \"333C\",\n            \"zipCode\": \"31270200\"\n        }\n    }",
+							"raw": "    {\n        \"login\": \"admin\",\n        \"firstName\": \"Admin\",\n        \"lastName\": \"Postman\",\n        \"email\": \"admin@admin.com\",\n        \"imageUrl\": \"https://thumbs.dreamstime.com/b/%C3%ADcone-do-admin-no-estilo-na-moda-projeto-isolado-fundo-branco-s%C3%ADmbolo-liso-simples-e-moderno-vetor-para-135742404.jpg\",\n        \"activated\": true,\n        \"langKey\": \"pt-br\",\n        \"authorities\": [\n            \"ROLE_USER\",\n            \"ROLE_ADMIN\"\n        ],\n        \"birthDate\": \"2003-06-20\",\n        \"address\": {\n            \"street\": \"Rua Jesus\",\n            \"city\": \"Belo Horizonte\",\n            \"state\": \"MG\",\n            \"country\": \"Brazil\",\n            \"complement\": \"Apto 102\",\n            \"number\": \"333C\",\n            \"zipCode\": \"31270200\"\n        }\n    }",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -150,7 +150,7 @@
 							"variable": [
 								{
 									"key": "login",
-									"value": "testeemailreal"
+									"value": "user"
 								}
 							]
 						}
@@ -178,6 +178,83 @@
 							""
 						]
 					}
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "CRUD Products",
+			"item": [
+				{
+					"name": "Get All Products by User",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN_OAUTH}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/admin/products",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"admin",
+								"products"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add Product",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN_OAUTH}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Controle DualSense - Preto PS5\",\n    \"category\": \"Videogame\",\n    \"priceBase\": \"200\",\n    \"priceCurrency\": \"BRL\",\n    \"priceType\": \"HOUR\",\n    \"imageUrl\": \"https://gmedia.playstation.com/is/image/SIEPDC/co-op-games-duslsense-controllers-image-block-02-en-28jan21?$1600px--t$\",\n    \"description\": \"Controle em perfeito estado de funcionamento, apenas com 3 meses de uso.\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/admin/products",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"admin",
+								"products"
+							]
+						}
+					},
+					"response": []
 				}
 			],
 			"protocolProfileBehavior": {}
