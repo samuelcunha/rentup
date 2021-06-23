@@ -34,7 +34,7 @@ public class InitialSetupMigration {
         mongoTemplate.save(userAuthority);
     }
 
-    @ChangeSet(order = "02", author = "initiator", id = "03-addUsers")
+    @ChangeSet(order = "02", author = "initiator", id = "02-addUsers")
     public void addUsers(MongockTemplate mongoTemplate) throws ParseException {
         Authority adminAuthority = new Authority();
         adminAuthority.setName(AuthoritiesConstants.ADMIN);
@@ -92,7 +92,7 @@ public class InitialSetupMigration {
         mongoTemplate.save(userUser);
     }
 
-    @ChangeSet(order = "03", author = "initiator", id = "04-addProducts")
+    @ChangeSet(order = "03", author = "initiator", id = "03-addProducts")
     public void addProducts(MongockTemplate mongoTemplate) {
         var product1 = new Product();
         product1.setId(UUID.randomUUID().toString());
