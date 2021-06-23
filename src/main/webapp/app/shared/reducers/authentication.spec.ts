@@ -1,4 +1,4 @@
-import { REQUEST, SUCCESS, FAILURE } from 'app/shared/reducers/action-type.util';
+import { FAILURE, REQUEST, SUCCESS } from 'app/shared/reducers/action-type.util';
 import thunk from 'redux-thunk';
 import axios from 'axios';
 import sinon from 'sinon';
@@ -8,11 +8,11 @@ import promiseMiddleware from 'redux-promise-middleware';
 
 import authentication, {
   ACTION_TYPES,
+  clearAuthentication,
+  clearAuthToken,
   getSession,
   login,
-  clearAuthentication,
   logout,
-  clearAuthToken,
 } from 'app/shared/reducers/authentication';
 import { ACTION_TYPES as localeActionTypes } from 'app/shared/reducers/locale';
 

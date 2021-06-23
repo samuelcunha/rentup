@@ -1,6 +1,6 @@
 package com.rentup.app.repository;
 
-import com.rentup.app.domain.User;
+import com.rentup.app.domain.user.User;
 import java.time.Instant;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.mongodb.repository.ReactiveMongoRepository;

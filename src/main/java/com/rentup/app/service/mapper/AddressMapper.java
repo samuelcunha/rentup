@@ -1,6 +1,6 @@
 package com.rentup.app.service.mapper;
 
-import com.rentup.app.domain.Address;
+import com.rentup.app.domain.user.Address;
 import com.rentup.app.service.dto.AddressDTO;
 
 public class AddressMapper {

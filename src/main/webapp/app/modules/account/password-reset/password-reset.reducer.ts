@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { translate } from 'react-jhipster';
 
-import { REQUEST, SUCCESS, FAILURE } from 'app/shared/reducers/action-type.util';
+import { FAILURE, REQUEST, SUCCESS } from 'app/shared/reducers/action-type.util';
 
 export const ACTION_TYPES = {
   RESET_PASSWORD_INIT: 'passwordReset/RESET_PASSWORD_INIT',

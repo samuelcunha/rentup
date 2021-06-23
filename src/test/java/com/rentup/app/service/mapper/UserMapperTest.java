@@ -2,7 +2,7 @@ package com.rentup.app.service.mapper;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import com.rentup.app.domain.User;
+import com.rentup.app.domain.user.User;
 import com.rentup.app.service.dto.AdminUserDTO;
 import com.rentup.app.service.dto.UserDTO;
 import java.util.ArrayList;

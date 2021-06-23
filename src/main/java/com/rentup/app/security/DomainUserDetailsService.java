@@ -1,6 +1,6 @@
 package com.rentup.app.security;
 
-import com.rentup.app.domain.User;
+import com.rentup.app.domain.user.User;
 import com.rentup.app.repository.UserRepository;
 import java.util.List;
 import java.util.Locale;

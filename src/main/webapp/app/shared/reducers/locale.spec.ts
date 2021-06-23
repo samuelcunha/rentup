@@ -4,7 +4,7 @@ import configureStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import { TranslatorContext } from 'react-jhipster';
 
-import locale, { setLocale, ACTION_TYPES } from 'app/shared/reducers/locale';
+import locale, { ACTION_TYPES, setLocale } from 'app/shared/reducers/locale';
 
 describe('Locale reducer tests', () => {
   it('should return the initial state', () => {

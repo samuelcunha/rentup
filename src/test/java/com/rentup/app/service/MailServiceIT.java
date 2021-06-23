@@ -1,12 +1,13 @@
 package com.rentup.app.service;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.fail;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
 import com.rentup.app.IntegrationTest;
 import com.rentup.app.config.Constants;
-import com.rentup.app.domain.User;
+import com.rentup.app.domain.user.User;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;

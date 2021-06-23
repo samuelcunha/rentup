@@ -1,7 +1,9 @@
-package com.rentup.app.domain;
+package com.rentup.app.domain.user;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.rentup.app.config.Constants;
+import com.rentup.app.domain.AbstractAuditingEntity;
+import com.rentup.app.domain.Authority;
 import java.io.Serializable;
 import java.time.Instant;
 import java.util.Date;
