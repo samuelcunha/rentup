@@ -46,9 +46,9 @@ public class ProductResource {
     /**
      * {@code POST  /admin/products}  : Creates a new product.
      * <p>
-     *  Creates a new product
+     * Creates a new product
      *
-     * @param productDTO the user to create.
+     * @param productDTO the product attributes to create.
      * @return the {@link ResponseEntity} with status {@code 201 (Created)} and with body the new product, or with status {@code 400 (Bad Request)} if the user dont exists.
      * @throws BadRequestAlertException {@code 400 (Bad Request)} if the user dont exists.
      */
@@ -84,9 +84,9 @@ public class ProductResource {
     /**
      * {@code GET  /admin/products}  : Return all products by logged User
      * <p>
-     *  Return all products by logged User
+     * Return all products by logged User
      *
-     * @param request a {@link ServerHttpRequest} request.
+     * @param request  a {@link ServerHttpRequest} request.
      * @param pageable the pagination information.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body all products.
      */
