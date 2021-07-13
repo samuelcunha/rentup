@@ -9,10 +9,6 @@ import org.springframework.web.server.WebFilter;
 import org.springframework.web.server.WebFilterChain;
 import reactor.core.publisher.Mono;
 
-/**
- * Filters incoming requests and installs a Spring Security principal if a header corresponding to a valid user is
- * found.
- */
 public class JWTFilter implements WebFilter {
 
     public static final String AUTHORIZATION_HEADER = "Authorization";
