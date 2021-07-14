@@ -4,7 +4,7 @@ import static com.rentup.app.service.mapper.AddressMapper.addressDTOToAddress;
 
 import com.rentup.app.config.Constants;
 import com.rentup.app.domain.Authority;
-import com.rentup.app.domain.User;
+import com.rentup.app.domain.user.User;
 import com.rentup.app.domain.util.DateUtil;
 import com.rentup.app.repository.AuthorityRepository;
 import com.rentup.app.repository.UserRepository;

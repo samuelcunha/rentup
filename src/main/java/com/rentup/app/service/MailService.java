@@ -1,6 +1,6 @@
 package com.rentup.app.service;
 
-import com.rentup.app.domain.User;
+import com.rentup.app.domain.user.User;
 import java.nio.charset.StandardCharsets;
 import java.util.Locale;
 import javax.mail.MessagingException;

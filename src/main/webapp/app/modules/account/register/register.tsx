@@ -2,8 +2,8 @@ import React, { useEffect } from 'react';
 
 import { IRootState } from 'app/shared/reducers';
 import Header from '../../../shared/layout/header/header';
-import { Container, Grid, TextField, makeStyles, Button } from '@material-ui/core';
-import { useForm, Controller } from 'react-hook-form';
+import { Button, Container, Grid, makeStyles, TextField } from '@material-ui/core';
+import { Controller, useForm } from 'react-hook-form';
 import { KeyboardDatePicker, MuiPickersUtilsProvider } from '@material-ui/pickers';
 import DateFnsUtils from '@date-io/date-fns';
 import { handleRegister } from './register.reducer';

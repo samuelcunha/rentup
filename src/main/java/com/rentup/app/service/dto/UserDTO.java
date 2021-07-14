@@ -1,6 +1,6 @@
 package com.rentup.app.service.dto;
 
-import com.rentup.app.domain.User;
+import com.rentup.app.domain.user.User;
 
 /**
  * A DTO representing a user, with only the public attributes.

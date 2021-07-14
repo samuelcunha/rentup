@@ -1,13 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Translate, translate } from 'react-jhipster';
 import { connect } from 'react-redux';
-import { AvForm, AvField } from 'availity-reactstrap-validation';
-import { Row, Col, Button } from 'reactstrap';
+import { AvField, AvForm } from 'availity-reactstrap-validation';
+import { Button, Col, Row } from 'reactstrap';
 
 import { IRootState } from 'app/shared/reducers';
 import { getSession } from 'app/shared/reducers/authentication';
 import PasswordStrengthBar from 'app/shared/layout/password/password-strength-bar';
-import { savePassword, reset } from './password.reducer';
+import { reset, savePassword } from './password.reducer';
 
 export interface IUserPasswordProps extends StateProps, DispatchProps {}
 

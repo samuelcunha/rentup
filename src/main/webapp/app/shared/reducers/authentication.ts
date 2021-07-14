@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { Storage } from 'react-jhipster';
 
-import { REQUEST, SUCCESS, FAILURE } from 'app/shared/reducers/action-type.util';
+import { FAILURE, REQUEST, SUCCESS } from 'app/shared/reducers/action-type.util';
 import { setLocale } from 'app/shared/reducers/locale';
 
 export const ACTION_TYPES = {

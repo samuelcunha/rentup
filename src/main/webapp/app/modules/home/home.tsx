@@ -4,7 +4,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import SearchIcon from '@material-ui/icons/Search';
-import { Button, Container, Grid, InputBase, makeStyles, IconButton, Paper } from '@material-ui/core';
+import { Button, Container, Grid, IconButton, InputBase, makeStyles, Paper } from '@material-ui/core';
 import Header from 'app/shared/layout/header/header';
 
 export type IHomeProp = StateProps;

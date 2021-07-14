@@ -4,16 +4,16 @@ import axios from 'axios';
 import thunk from 'redux-thunk';
 import sinon from 'sinon';
 
-import { REQUEST, FAILURE, SUCCESS } from 'app/shared/reducers/action-type.util';
+import { FAILURE, REQUEST, SUCCESS } from 'app/shared/reducers/action-type.util';
 import administration, {
   ACTION_TYPES,
-  systemHealth,
-  systemMetrics,
-  systemThreadDump,
-  getLoggers,
   changeLogLevel,
   getConfigurations,
   getEnv,
+  getLoggers,
+  systemHealth,
+  systemMetrics,
+  systemThreadDump,
 } from './administration.reducer';
 
 describe('Administration reducer tests', () => {

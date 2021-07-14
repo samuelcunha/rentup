@@ -1,4 +1,4 @@
-package com.rentup.app.domain;
+package com.rentup.app.domain.user;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.io.Serializable;

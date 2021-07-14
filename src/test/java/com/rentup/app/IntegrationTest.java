@@ -1,6 +1,5 @@
 package com.rentup.app;
 
-import com.rentup.app.RentupApp;
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;

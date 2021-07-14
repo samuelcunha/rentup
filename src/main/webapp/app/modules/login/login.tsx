@@ -1,10 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Redirect, RouteComponentProps } from 'react-router-dom';
+import { Link, Redirect, RouteComponentProps } from 'react-router-dom';
 
 import { IRootState } from 'app/shared/reducers';
 import { login } from 'app/shared/reducers/authentication';
-import { Link } from 'react-router-dom';
 import { Button, Checkbox, Container, FormControlLabel, Grid, makeStyles, TextField } from '@material-ui/core';
 import { Translate } from 'react-jhipster';
 import Header from '../../shared/layout/header/header';

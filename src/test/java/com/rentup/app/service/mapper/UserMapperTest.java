@@ -2,7 +2,7 @@ package com.rentup.app.service.mapper;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import com.rentup.app.domain.User;
+import com.rentup.app.domain.user.User;
 import com.rentup.app.service.dto.AdminUserDTO;
 import com.rentup.app.service.dto.UserDTO;
 import java.util.ArrayList;
@@ -13,9 +13,6 @@ import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-/**
- * Unit tests for {@link UserMapper}.
- */
 class UserMapperTest {
 
     private static final String DEFAULT_LOGIN = "johndoe";

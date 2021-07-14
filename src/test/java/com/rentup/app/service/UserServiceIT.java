@@ -4,10 +4,8 @@ import static com.rentup.app.domain.util.DateUtil.DATE_FORMAT;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import com.rentup.app.IntegrationTest;
-import com.rentup.app.config.Constants;
-import com.rentup.app.domain.User;
+import com.rentup.app.domain.user.User;
 import com.rentup.app.repository.UserRepository;
-import com.rentup.app.service.dto.AdminUserDTO;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.Instant;
@@ -18,7 +16,6 @@ import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.PageRequest;
 import tech.jhipster.security.RandomUtil;
 
 /**

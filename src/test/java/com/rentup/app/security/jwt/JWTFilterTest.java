@@ -9,7 +9,6 @@ import java.util.Collections;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.mock.http.server.reactive.MockServerHttpRequest;
-import org.springframework.mock.http.server.reactive.MockServerHttpRequest.BaseBuilder;
 import org.springframework.mock.web.server.MockServerWebExchange;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -19,6 +18,7 @@ import org.springframework.test.util.ReflectionTestUtils;
 import reactor.core.publisher.Mono;
 import tech.jhipster.config.JHipsterProperties;
 
+@SuppressWarnings("ALL")
 class JWTFilterTest {
 
     private TokenProvider tokenProvider;
@@ -29,10 +29,11 @@ class JWTFilterTest {
         var jHipsterProperties = new JHipsterProperties();
         var base64Secret = "fd54a45s65fds737b9aafcb3412e07ed99b267f33413274720ddbb7f6c5e64e9f14075f2d7ed041592f0b7657baf8";
         jHipsterProperties.getSecurity().getAuthentication().getJwt().setBase64Secret(base64Secret);
+
         tokenProvider = new TokenProvider(jHipsterProperties);
         ReflectionTestUtils.setField(tokenProvider, "key", Keys.hmacShaKeyFor(Decoders.BASE64.decode(base64Secret)));
-
         ReflectionTestUtils.setField(tokenProvider, "tokenValidityInMilliseconds", 60000);
+
         jwtFilter = new JWTFilter(tokenProvider);
     }
 

@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { Translate } from 'react-jhipster';
 
-import { getLoggers, changeLogLevel } from '../administration.reducer';
+import { changeLogLevel, getLoggers } from '../administration.reducer';
 import { IRootState } from 'app/shared/reducers';
 
 export interface ILogsPageProps extends StateProps, DispatchProps {}

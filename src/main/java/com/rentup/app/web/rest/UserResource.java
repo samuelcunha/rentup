@@ -1,7 +1,7 @@
 package com.rentup.app.web.rest;
 
 import com.rentup.app.config.Constants;
-import com.rentup.app.domain.User;
+import com.rentup.app.domain.user.User;
 import com.rentup.app.repository.UserRepository;
 import com.rentup.app.security.AuthoritiesConstants;
 import com.rentup.app.service.MailService;

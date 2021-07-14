@@ -5,7 +5,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 import com.rentup.app.IntegrationTest;
-import com.rentup.app.domain.User;
+import com.rentup.app.domain.user.User;
 import com.rentup.app.repository.UserRepository;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

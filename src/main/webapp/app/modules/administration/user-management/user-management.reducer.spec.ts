@@ -4,17 +4,17 @@ import axios from 'axios';
 import thunk from 'redux-thunk';
 import sinon from 'sinon';
 
-import { REQUEST, SUCCESS, FAILURE } from 'app/shared/reducers/action-type.util';
+import { FAILURE, REQUEST, SUCCESS } from 'app/shared/reducers/action-type.util';
 import userManagement, {
   ACTION_TYPES,
-  getUsers,
-  getUsersAsAdmin,
+  createUser,
+  deleteUser,
   getRoles,
   getUser,
-  createUser,
-  updateUser,
-  deleteUser,
+  getUsers,
+  getUsersAsAdmin,
   reset,
+  updateUser,
 } from './user-management.reducer';
 import { defaultValue } from 'app/shared/model/user.model';
 import { AUTHORITIES } from 'app/config/constants';

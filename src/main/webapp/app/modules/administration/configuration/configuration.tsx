@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
-import { Table, Input, Row, Col, Badge } from 'reactstrap';
+import { Badge, Col, Input, Row, Table } from 'reactstrap';
 import { Translate } from 'react-jhipster';
 
 import { getConfigurations, getEnv } from '../administration.reducer';
