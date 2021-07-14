@@ -6,6 +6,8 @@ import com.rentup.app.repository.ProductRepository;
 import com.rentup.app.security.SecurityUtils;
 import com.rentup.app.service.dto.ProductDTO;
 import com.rentup.app.service.mapper.ProductMapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
@@ -13,6 +15,8 @@ import reactor.core.publisher.Mono;
 
 @Service
 public class ProductService {
+
+    private final Logger log = LoggerFactory.getLogger(ProductService.class);
 
     public ProductService(ProductRepository productRepository) {
         this.productRepository = productRepository;
@@ -31,6 +35,14 @@ public class ProductService {
 
     public Mono<Long> countProductsByUser(String userId) {
         return productRepository.countAllByUser(userId);
+    }
+
+    public Mono<Void> deleteProduct(String id, String userId) {
+        return productRepository
+            .findOneByIdAndUser(id, userId)
+            .flatMap(product -> productRepository.delete(product).thenReturn(product))
+            .doOnNext(product -> log.debug("Deleted product: {}", product))
+            .then();
     }
 
     private Mono<Product> saveProduct(Product product) {

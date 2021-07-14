@@ -18,6 +18,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -108,6 +109,33 @@ public class ProductResource {
                                     .ok()
                                     .headers(generatePaginationHttpHeaders(fromHttpRequest(request), page))
                                     .body(productService.getAllProductsByUser(pageable, user.getId()))
+                        )
+            );
+    }
+
+    /**
+     * {@code DELETE /admin/products/:id} : delete the "id" product.
+     *
+     * @param id of the product to delete
+     * @return the {@link ResponseEntity} with status {@code 204 (NO_CONTENT)}.
+     */
+    @DeleteMapping("/products/{id}")
+    @PreAuthorize("hasAuthority(\"" + AuthoritiesConstants.ADMIN + "\")")
+    @ResponseStatus(code = HttpStatus.NO_CONTENT)
+    public Mono<ResponseEntity<Void>> deleteUser(@PathVariable String id) {
+        log.debug("REST request to delete Product: {}", id);
+        return userService
+            .getUserWithAuthorities()
+            .flatMap(
+                user ->
+                    productService
+                        .deleteProduct(id, user.getId())
+                        .map(
+                            it ->
+                                ResponseEntity
+                                    .noContent()
+                                    .headers(HeaderUtil.createAlert(applicationName, "userManagement.deleted", id))
+                                    .build()
                         )
             );
     }
