@@ -80,13 +80,13 @@ export const Home = props => {
                   </IconButton>
                 </Paper>
               </Grid>
-              <Grid item spacing={5}>
+              <Grid item>
                 <Button
                   variant="contained"
                   color="secondary"
                   disableElevation
                   component={Link}
-                  to="/account/register"
+                  to="/products/create"
                   className={classes.button}
                 >
                   Anuncie um produto

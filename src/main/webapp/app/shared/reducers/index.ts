@@ -11,7 +11,9 @@ import register, { RegisterState } from 'app/modules/account/register/register.r
 import activate, { ActivateState } from 'app/modules/account/activate/activate.reducer';
 import password, { PasswordState } from 'app/modules/account/password/password.reducer';
 import settings, { SettingsState } from 'app/modules/account/settings/settings.reducer';
+import createProduct, { CreateProductState } from 'app/modules/products/create-product/create-product.reducer';
 import passwordReset, { PasswordResetState } from 'app/modules/account/password-reset/password-reset.reducer';
+import listProducts, { ListProductsState } from 'app/modules/products/list-products/list-products.reducer';
 
 /* jhipster-needle-add-reducer-import - JHipster will add reducer here */
 
@@ -28,6 +30,8 @@ export interface IRootState {
   readonly settings: SettingsState;
   /* jhipster-needle-add-reducer-type - JHipster will add reducer type here */
   readonly loadingBar: any;
+  readonly createProduct: CreateProductState;
+  readonly listProducts: ListProductsState;
 }
 
 const rootReducer = combineReducers<IRootState>({
@@ -43,6 +47,8 @@ const rootReducer = combineReducers<IRootState>({
   settings,
   /* jhipster-needle-add-reducer-combine - JHipster will add reducer here */
   loadingBar,
+  createProduct,
+  listProducts,
 });
 
 export default rootReducer;

@@ -4,6 +4,8 @@ import Loadable from 'react-loadable';
 
 import Login from 'app/modules/login/login';
 import Register from 'app/modules/account/register/register';
+import CreateProduct from 'app/modules/products/create-product/create-product';
+import ListProducts from './modules/products/list-products/list-products';
 import Activate from 'app/modules/account/activate/activate';
 import PasswordResetInit from 'app/modules/account/password-reset/init/password-reset-init';
 import PasswordResetFinish from 'app/modules/account/password-reset/finish/password-reset-finish';
@@ -35,6 +37,9 @@ const Routes = () => {
         <ErrorBoundaryRoute path="/account/activate/:key?" component={Activate} />
         <ErrorBoundaryRoute path="/account/reset/request" component={PasswordResetInit} />
         <ErrorBoundaryRoute path="/account/reset/finish/:key?" component={PasswordResetFinish} />
+        <ErrorBoundaryRoute path="/products/create" component={CreateProduct} />
+        <ErrorBoundaryRoute path="/products/user" component={ListProducts} />
+        <ErrorBoundaryRoute path="/products/user/:userId" component={ListProducts} />
         <PrivateRoute path="/admin" component={Admin} hasAnyAuthorities={[AUTHORITIES.ADMIN]} />
         <PrivateRoute path="/account" component={Account} hasAnyAuthorities={[AUTHORITIES.ADMIN, AUTHORITIES.USER]} />
         <ErrorBoundaryRoute path="/" exact component={Home} />

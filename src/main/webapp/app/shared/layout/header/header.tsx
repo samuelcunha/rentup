@@ -57,18 +57,22 @@ const Header = props => {
         </Card>
       </Link>
       <List>
-        <ListItem button>
-          <ListItemIcon>
-            <HomeIcon />
-          </ListItemIcon>
-          <ListItemText primary="Inicio" />
-        </ListItem>
-        <ListItem button>
-          <ListItemIcon>
-            <StorefrontIcon />
-          </ListItemIcon>
-          <ListItemText primary="Meus Anúncios" />
-        </ListItem>
+        <Link to="/">
+          <ListItem button>
+            <ListItemIcon>
+              <HomeIcon />
+            </ListItemIcon>
+            <ListItemText primary="Inicio" />
+          </ListItem>
+        </Link>
+        <Link to="/products/user">
+          <ListItem button>
+            <ListItemIcon>
+              <StorefrontIcon />
+            </ListItemIcon>
+            <ListItemText primary="Meus Anúncios" />
+          </ListItem>
+        </Link>
         <Link to="/logout">
           <ListItem button>
             <ListItemIcon>
