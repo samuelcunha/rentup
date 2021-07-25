@@ -90,10 +90,12 @@ export default () => next => action => {
               break;
 
             default:
-              if (data !== '' && data.message) {
-                addErrorAlert(data.message);
-              } else {
-                addErrorAlert(data);
+              if (data.status !== 401) {
+                if (data !== '' && data.message) {
+                  addErrorAlert(data.message);
+                } else {
+                  addErrorAlert(data);
+                }
               }
           }
         }

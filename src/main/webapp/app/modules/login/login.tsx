@@ -87,12 +87,6 @@ export const Login = props => {
                   defaultValue={false}
                   render={({ field }) => <FormControlLabel control={<Checkbox size="small" {...field} />} label="Manter conectado" />}
                 />
-
-                <Link to="/account/reset/request">
-                  <Button color="secondary" type="button" size="small">
-                    Esqueceu a senha?
-                  </Button>
-                </Link>
               </Grid>
               {props.loginError ? (
                 <Alert color="danger" data-cy="loginError">
