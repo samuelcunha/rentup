@@ -5,6 +5,7 @@ import static com.rentup.app.web.rest.AccountResourceIT.TEST_USER_LOGIN;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import com.rentup.app.IntegrationTest;
+import com.rentup.app.TestUtil;
 import com.rentup.app.config.Constants;
 import com.rentup.app.domain.user.User;
 import com.rentup.app.repository.AuthorityRepository;

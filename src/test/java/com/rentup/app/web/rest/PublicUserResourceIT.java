@@ -1,5 +1,6 @@
 package com.rentup.app.web.rest;
 
+import static com.rentup.app.web.rest.UserResourceFixture.initTestUser;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import com.rentup.app.IntegrationTest;
@@ -36,7 +37,7 @@ class PublicUserResourceIT {
 
     @BeforeEach
     public void initTest() throws ParseException {
-        user = UserResourceIT.initTestUser(userRepository);
+        user = initTestUser(userRepository);
     }
 
     @Test

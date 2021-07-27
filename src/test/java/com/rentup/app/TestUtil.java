@@ -1,4 +1,4 @@
-package com.rentup.app.web.rest;
+package com.rentup.app;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -10,13 +10,12 @@ import java.io.IOException;
 import java.math.BigDecimal;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeParseException;
+import lombok.experimental.UtilityClass;
 import org.hamcrest.Description;
 import org.hamcrest.TypeSafeDiagnosingMatcher;
 import org.hamcrest.TypeSafeMatcher;
 
-/**
- * Utility class for testing REST controllers.
- */
+@UtilityClass
 public final class TestUtil {
 
     private static final ObjectMapper mapper = createObjectMapper();
@@ -164,6 +163,4 @@ public final class TestUtil {
         // HashCodes are equals because the objects are not persisted yet
         assertThat(domainObject1).hasSameHashCodeAs(domainObject2);
     }
-
-    private TestUtil() {}
 }
