@@ -5,40 +5,43 @@ import configureStore from 'redux-mock-store';
 import promiseMiddleware from 'redux-promise-middleware';
 
 import { FAILURE, REQUEST, SUCCESS } from 'app/shared/reducers/action-type.util';
-import listProducts, { ACTION_TYPES, getProducts, reset } from './list-products.reducer';
+import searchProduct, { ACTION_TYPES, findProduct, reset } from './search-product.reducer';
 
-describe('Creating list product tests', () => {
+describe('Creating search product tests', () => {
   const initialState = {
     loading: false,
     errorMessage: null,
     products: [],
+    filter: { query: '', params: {} },
   };
 
   beforeAll(() => {});
 
   it('should return the initial state', () => {
-    expect(listProducts(undefined, {})).toEqual({
+    expect(searchProduct(undefined, {})).toEqual({
       ...initialState,
     });
   });
 
   it('should detect a request', () => {
-    expect(listProducts(undefined, { type: REQUEST(ACTION_TYPES.GET_PRODUCTS) })).toEqual({
+    expect(searchProduct(undefined, { type: REQUEST(ACTION_TYPES.SEARCH_PRODUCT) })).toEqual({
       ...initialState,
       loading: true,
     });
   });
 
   it('should handle RESET', () => {
-    expect(listProducts({ loading: true, products: [], errorMessage: '' }, { type: ACTION_TYPES.RESET })).toEqual({
+    expect(
+      searchProduct({ loading: true, products: [], filter: { query: '', params: {} }, errorMessage: '' }, { type: ACTION_TYPES.RESET })
+    ).toEqual({
       ...initialState,
     });
   });
 
-  it('should handle GET_PRODUCTS success', () => {
+  it('should handle SEARCH_PRODUCT success', () => {
     expect(
-      listProducts(undefined, {
-        type: SUCCESS(ACTION_TYPES.GET_PRODUCTS),
+      searchProduct(undefined, {
+        type: SUCCESS(ACTION_TYPES.SEARCH_PRODUCT),
         payload: { data: 'fake payload' },
       })
     ).toEqual({
@@ -47,11 +50,11 @@ describe('Creating list product tests', () => {
     });
   });
 
-  it('should handle GET_PRODUCTS failure', () => {
+  it('should handle SEARCH_PRODUCT failure', () => {
     const payload = { response: { data: { errorKey: 'fake error' } } };
     expect(
-      listProducts(undefined, {
-        type: FAILURE(ACTION_TYPES.GET_PRODUCTS),
+      searchProduct(undefined, {
+        type: FAILURE(ACTION_TYPES.SEARCH_PRODUCT),
         payload,
       })
     ).toEqual({
@@ -71,17 +74,17 @@ describe('Creating list product tests', () => {
       axios.get = sinon.stub().returns(Promise.resolve(resolvedObject));
     });
 
-    it('dispatches GET_PRODUCTS_PENDING and GET_PRODUCTS_FULFILLED actions', async () => {
+    it('dispatches SEARCH_PRODUCT_PENDING and SEARCH_PRODUCT_FULFILLED actions', async () => {
       const expectedActions = [
         {
-          type: REQUEST(ACTION_TYPES.GET_PRODUCTS),
+          type: REQUEST(ACTION_TYPES.SEARCH_PRODUCT),
         },
         {
-          type: SUCCESS(ACTION_TYPES.GET_PRODUCTS),
+          type: SUCCESS(ACTION_TYPES.SEARCH_PRODUCT),
           payload: resolvedObject,
         },
       ];
-      await store.dispatch(getProducts()).then(() => expect(store.getActions()).toEqual(expectedActions));
+      await store.dispatch(findProduct({ query: 'test', params: {} })).then(() => expect(store.getActions()).toEqual(expectedActions));
     });
     it('dispatches ACTION_TYPES.RESET actions', async () => {
       const expectedActions = [

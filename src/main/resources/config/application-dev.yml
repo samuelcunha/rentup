@@ -19,6 +19,7 @@ logging:
     tech.jhipster: DEBUG
     org.hibernate.SQL: DEBUG
     com.rentup.app: DEBUG
+    org.springframework.data.mongodb.core.ReactiveMongoTemplate: DEBUG
 
 spring:
   devtools:
