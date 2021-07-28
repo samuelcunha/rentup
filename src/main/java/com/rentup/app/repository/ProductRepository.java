@@ -14,7 +14,11 @@ import reactor.core.publisher.Mono;
 public interface ProductRepository extends ReactiveMongoRepository<Product, String> {
     Flux<Product> findAllByIdNotNull(Pageable pageable);
     Flux<Product> findAllByUser(Pageable pageable, String user);
+    Flux<Product> findAllByUserNot(Pageable pageable, String user);
+    Flux<Product> findAllByUserNotAndNameContains(Pageable pageable, String user, String name);
     Mono<Product> findOneByIdAndUser(String id, String user);
 
     Mono<Long> countAllByUser(String user);
+    Mono<Long> countAllByUserNot(String user);
+    Mono<Long> countAllByUserNotAndNameContains(String user, String name);
 }
