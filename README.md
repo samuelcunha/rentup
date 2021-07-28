@@ -54,6 +54,8 @@ relacionados a chamadas HTTP e conexões com Bancos de Dados Relacionais e Não 
 
 A principal funcionalidade de nosso sistema é o fluxo de locação de produtos por nossos clientes.
 Para esse processo, criamos a modelagem abaixo que exemplifica nosso processo de forma assíncrona:
-utilizando filas para comunicação entre processos e uma tabela para manter o ciclo de vida da solicitação.
+
+- Filas para comunicação entre processos
+- Tabela para manter o ciclo de vida da solicitação.
 
 ![Modelagem locacao](src/main/resources/imgs/desenho-arquitetural-rentup-locacao.png)
