@@ -1,18 +1,18 @@
 package com.rentup.app.domain.product;
 
 public enum PriceType {
-    HOUR("Hourly price"),
-    DAY("Price per day"),
-    WEEK("Price per week"),
-    MONTH("Price per month");
+    HOUR("price.description.hour"),
+    DAY("price.description.day"),
+    WEEK("price.description.week"),
+    MONTH("price.description.month");
 
-    String description;
+    String descriptionKey;
 
-    PriceType(String description) {
-        this.description = description;
+    PriceType(String descriptionKey) {
+        this.descriptionKey = descriptionKey;
     }
 
-    public String getDescription() {
-        return description;
+    public String getDescriptionKey() {
+        return descriptionKey;
     }
 }

@@ -7,7 +7,6 @@ import com.rentup.app.security.AuthoritiesConstants;
 import com.rentup.app.service.ProductService;
 import com.rentup.app.service.UserService;
 import com.rentup.app.service.dto.ProductDTO;
-import com.rentup.app.service.mapper.ProductMapper;
 import com.rentup.app.web.rest.errors.BadRequestAlertException;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -73,7 +72,7 @@ public class ProductResource {
                                     return ResponseEntity
                                         .created(new URI("/api/admin/products/" + product.getId()))
                                         .headers(HeaderUtil.createAlert(applicationName, "productManagement.created", product.getId()))
-                                        .body(ProductMapper.productToProductDTO(product));
+                                        .body(productService.convertProductToDTO(product));
                                 } catch (URISyntaxException e) {
                                     throw new RuntimeException(e);
                                 }

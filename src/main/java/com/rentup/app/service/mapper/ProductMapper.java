@@ -7,10 +7,16 @@ import com.rentup.app.domain.product.Price;
 import com.rentup.app.domain.product.PriceType;
 import com.rentup.app.domain.product.Product;
 import com.rentup.app.service.dto.ProductDTO;
+import java.util.Locale;
+import lombok.experimental.UtilityClass;
+import org.springframework.context.MessageSource;
 
+@UtilityClass
 public class ProductMapper {
 
-    public static ProductDTO productToProductDTO(Product product) {
+    private static final Locale BRAZIL = new Locale("pt", "BR");
+
+    public static ProductDTO productToProductDTO(Product product, MessageSource messageSource) {
         if (isNull(product)) {
             return new ProductDTO();
         } else {
@@ -24,7 +30,8 @@ public class ProductMapper {
             if (nonNull(price)) {
                 productDTO.setPriceBase(price.getBase());
                 productDTO.setPriceCurrency(price.getCurrency());
-                productDTO.setPriceType(price.getType().getDescription());
+                productDTO.setPriceType(price.getType().name());
+                productDTO.setPriceTypeDescription(messageSource.getMessage(price.getType().getDescriptionKey(), null, BRAZIL));
             }
             return productDTO;
         }

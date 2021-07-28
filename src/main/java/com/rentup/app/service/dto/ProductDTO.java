@@ -12,6 +12,7 @@ public class ProductDTO implements Serializable {
     private String priceBase;
     private String priceCurrency;
     private String priceType;
+    private String priceTypeDescription;
     private String imageUrl;
     private String description;
 
@@ -22,6 +23,7 @@ public class ProductDTO implements Serializable {
         String priceBase,
         String priceCurrency,
         String priceType,
+        String priceTypeDescription,
         String imageUrl,
         String description
     ) {
@@ -31,6 +33,7 @@ public class ProductDTO implements Serializable {
         this.priceBase = priceBase;
         this.priceCurrency = priceCurrency;
         this.priceType = priceType;
+        this.priceTypeDescription = priceTypeDescription;
         this.imageUrl = imageUrl;
         this.description = description;
     }
@@ -83,6 +86,14 @@ public class ProductDTO implements Serializable {
 
     public void setPriceType(String priceType) {
         this.priceType = priceType;
+    }
+
+    public String getPriceTypeDescription() {
+        return priceTypeDescription;
+    }
+
+    public void setPriceTypeDescription(String priceTypeDescription) {
+        this.priceTypeDescription = priceTypeDescription;
     }
 
     public String getImageUrl() {

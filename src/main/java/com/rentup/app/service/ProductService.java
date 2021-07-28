@@ -1,13 +1,15 @@
 package com.rentup.app.service;
 
+import static com.rentup.app.service.mapper.ProductMapper.*;
+
 import com.rentup.app.config.Constants;
 import com.rentup.app.domain.product.Product;
 import com.rentup.app.repository.ProductRepository;
 import com.rentup.app.security.SecurityUtils;
 import com.rentup.app.service.dto.ProductDTO;
-import com.rentup.app.service.mapper.ProductMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.context.MessageSource;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
@@ -18,19 +20,25 @@ public class ProductService {
 
     private final Logger log = LoggerFactory.getLogger(ProductService.class);
 
-    public ProductService(ProductRepository productRepository) {
+    private final ProductRepository productRepository;
+    private final MessageSource messageSource;
+
+    public ProductService(ProductRepository productRepository, MessageSource messageSource) {
         this.productRepository = productRepository;
+        this.messageSource = messageSource;
     }
 
-    private final ProductRepository productRepository;
-
     public Mono<Product> createProduct(ProductDTO productDTO, String userId) {
-        var product = ProductMapper.productDTOToProduct(productDTO, userId);
+        var product = productDTOToProduct(productDTO, userId);
         return this.saveProduct(product);
     }
 
     public Flux<ProductDTO> getAllProductsByUser(Pageable pageable, String userId) {
-        return productRepository.findAllByUser(pageable, userId).map(ProductMapper::productToProductDTO);
+        return productRepository.findAllByUser(pageable, userId).map(product -> productToProductDTO(product, messageSource));
+    }
+
+    public ProductDTO convertProductToDTO(Product product) {
+        return productToProductDTO(product, messageSource);
     }
 
     public Mono<Long> countProductsByUser(String userId) {
