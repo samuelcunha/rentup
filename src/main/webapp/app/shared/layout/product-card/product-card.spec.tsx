@@ -48,6 +48,16 @@ describe('Header', () => {
     expect(html).toContain('Card');
   });
 
+  it('Should render CardMedia', () => {
+    const html = wrapper();
+    expect(html).toContain('CardMedia');
+  });
+
+  it('Should render CardContent', () => {
+    const html = wrapper();
+    expect(html).toContain('CardContent');
+  });
+
   it('Should render product image', () => {
     const html = wrapper();
     expect(html).not.toContain('no-image.png');

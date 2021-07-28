@@ -51,7 +51,7 @@ const ProductCard = props => {
           <div className={`${classes.title} `}>{props.product.name}</div>
           <div className={`${classes.truncate}`}>{props.product.description}</div>
           <div className={`${classes.price}`}>
-            R${props.product.priceBase} / {props.product.priceType}
+            R${props.product.priceBase} / {props.product.priceTypeDescription}
           </div>
         </CardContent>
       </div>

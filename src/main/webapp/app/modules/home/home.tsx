@@ -73,12 +73,14 @@ export const Home = props => {
                 <img src="content/images/logo.png" alt="Logo" className={classes.logoAuthenticated} />
               </Grid>
               <Grid item lg={6}>
-                <Paper component="form" className={classes.search}>
-                  <InputBase placeholder="Encontre um produto..." />
-                  <IconButton type="submit" className={classes.iconButton} aria-label="search">
-                    <SearchIcon />
-                  </IconButton>
-                </Paper>
+                <Link to="/products/search">
+                  <Paper component="form" className={classes.search}>
+                    <InputBase placeholder="Encontre um produto..." readOnly />
+                    <IconButton type="submit" className={classes.iconButton} aria-label="search">
+                      <SearchIcon />
+                    </IconButton>
+                  </Paper>
+                </Link>
               </Grid>
               <Grid item>
                 <Button
