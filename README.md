@@ -49,3 +49,13 @@ REST para o Backend da aplicação dividido por domínios de negócios e com Cli
 relacionados a chamadas HTTP e conexões com Bancos de Dados Relacionais e Não Relacionais.
 
 ![Diagram](src/main/resources/imgs/desenho-arquitetural-rentup-ARQ-GERAL.png)
+
+## Modelagem de locação de produtos
+
+A principal funcionalidade de nosso sistema é o fluxo de locação de produtos por nossos clientes.
+Para esse processo, criamos a modelagem abaixo que exemplifica nosso processo de forma assíncrona:
+
+- Filas para comunicação entre processos
+- Tabela para manter o ciclo de vida da solicitação.
+
+![Modelagem locacao](src/main/resources/imgs/desenho-arquitetural-rentup-locacao.png)
