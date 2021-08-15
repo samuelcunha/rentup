@@ -16,4 +16,4 @@ jobs:
           npm install
       - name: lint/test
         run: |
-          npm run test
+          npm run test-ci
