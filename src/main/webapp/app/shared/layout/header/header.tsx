@@ -46,7 +46,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const Header = props => {
-  const classes = useStyles();
+  let classes = useStyles();
   const [menuOpen, setMenuOpen] = useState(false);
 
   const renderDrawer = () => (
