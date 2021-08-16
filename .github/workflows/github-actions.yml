@@ -13,10 +13,8 @@ jobs:
           node-version: '14.x'
       - name: Install npm dependencies
         uses: bahmutov/npm-install@v1
-      - name: 
         run: |
           node -v
-          npm install
       - name: Lint/Test
         run: |
           npm run test-ci
