@@ -46,7 +46,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const Header = props => {
-  let classes = useStyles();
+  const classes = useStyles();
   const [menuOpen, setMenuOpen] = useState(false);
 
   const renderDrawer = () => (
@@ -90,7 +90,7 @@ const Header = props => {
       <AppBar position="static">
         <LoadingBar className="loading-bar" />
         <Toolbar>
-          {props.isAuthenticated && (
+          {!props.isAuthenticated && (
             <IconButton edge="start" className={classes.menuButton} color="inherit" onClick={() => setMenuOpen(true)}>
               <MenuIcon />
             </IconButton>
