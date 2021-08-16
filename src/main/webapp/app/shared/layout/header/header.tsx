@@ -90,7 +90,7 @@ const Header = props => {
       <AppBar position="static">
         <LoadingBar className="loading-bar" />
         <Toolbar>
-          {!props.isAuthenticated && (
+          {props.isAuthenticated && (
             <IconButton edge="start" className={classes.menuButton} color="inherit" onClick={() => setMenuOpen(true)}>
               <MenuIcon />
             </IconButton>
