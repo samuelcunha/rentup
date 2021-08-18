@@ -41,7 +41,7 @@ class TokenProviderTest {
     }
 
     @Test
-    void testReturnFalseWhenJWThasInvalidSignature() {
+    void testReturnFalseWhenJWTHasInvalidSignature() {
         boolean isTokenValid = tokenProvider.validateToken(createTokenWithDifferentSignature());
 
         assertThat(isTokenValid).isFalse();
