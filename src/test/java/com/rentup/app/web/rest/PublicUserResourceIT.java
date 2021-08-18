@@ -1,5 +1,6 @@
 package com.rentup.app.web.rest;
 
+import static com.rentup.app.web.rest.UserResourceFixture.DEFAULT_LOGIN;
 import static com.rentup.app.web.rest.UserResourceFixture.initTestUser;
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -24,8 +25,6 @@ import org.springframework.test.web.reactive.server.WebTestClient;
 @WithMockUser(authorities = AuthoritiesConstants.ADMIN)
 @IntegrationTest
 class PublicUserResourceIT {
-
-    private static final String DEFAULT_LOGIN = "johndoe";
 
     @Autowired
     private UserRepository userRepository;
