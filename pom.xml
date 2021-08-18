@@ -980,6 +980,5 @@
                 </pluginManagement>
             </build>
         </profile>
-        <!-- jhipster-needle-maven-add-profile -->
     </profiles>
 </project>
