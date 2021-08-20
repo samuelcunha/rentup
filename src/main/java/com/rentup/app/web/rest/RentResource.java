@@ -14,8 +14,6 @@ import java.net.URI;
 import java.util.ArrayList;
 import javax.validation.Valid;
 import org.apache.commons.lang3.StringUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
@@ -30,8 +28,6 @@ import tech.jhipster.web.util.HeaderUtil;
 @RestController
 @RequestMapping("/api/admin")
 public class RentResource {
-
-    private final Logger log = LoggerFactory.getLogger(RentResource.class);
 
     @Value("${jhipster.clientApp.name}")
     private String applicationName;
@@ -56,8 +52,6 @@ public class RentResource {
     @GetMapping("/rents/owner")
     @PreAuthorize("hasAuthority(\"" + AuthoritiesConstants.ADMIN + "\")")
     public Mono<ResponseEntity<Flux<RentDTO>>> getAllRentsOwner(ServerHttpRequest request, Pageable pageable) {
-        log.debug("REST request to get all Rents Owner for an user");
-
         return userService
             .getUserWithAuthorities()
             .flatMap(
@@ -87,8 +81,6 @@ public class RentResource {
     @GetMapping("/rents/user")
     @PreAuthorize("hasAuthority(\"" + AuthoritiesConstants.ADMIN + "\")")
     public Mono<ResponseEntity<Flux<RentDTO>>> getAllRentsUser(ServerHttpRequest request, Pageable pageable) {
-        log.debug("REST request to get all Rents for an user");
-
         return userService
             .getUserWithAuthorities()
             .flatMap(
@@ -118,8 +110,6 @@ public class RentResource {
     @PostMapping("/rents")
     @PreAuthorize("hasAuthority(\"" + AuthoritiesConstants.ADMIN + "\")")
     public Mono<ResponseEntity<RentDTO>> createNewRentOrder(@Valid @RequestBody RentDTO rentDTO) {
-        log.debug("REST request to save Rent : {}", rentDTO);
-
         if (nonNull(rentDTO.getId())) {
             throw new BadRequestAlertException("A new rent order cannot already have an ID", "rentOrderManagement", "idexists");
         }
@@ -156,8 +146,6 @@ public class RentResource {
     @PutMapping("/rents/{id}")
     @PreAuthorize("hasAuthority(\"" + AuthoritiesConstants.ADMIN + "\")")
     public Mono<ResponseEntity<RentDTO>> updateStatus(@PathVariable String id, @Valid @RequestBody RentDTO rentDTO) {
-        log.debug("REST request to update status Rent : {}", rentDTO);
-
         throwIfStatusOrIdIsInvalid(id, rentDTO.getStatus());
 
         return rentService

@@ -12,8 +12,6 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
 import javax.validation.Valid;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
@@ -29,8 +27,6 @@ import tech.jhipster.web.util.HeaderUtil;
 @RestController
 @RequestMapping("/api/admin")
 public class ProductResource {
-
-    private final Logger log = LoggerFactory.getLogger(ProductResource.class);
 
     @Value("${jhipster.clientApp.name}")
     private String applicationName;
@@ -55,8 +51,6 @@ public class ProductResource {
     @PostMapping("/products")
     @PreAuthorize("hasAuthority(\"" + AuthoritiesConstants.ADMIN + "\")")
     public Mono<ResponseEntity<ProductDTO>> createProduct(@Valid @RequestBody ProductDTO productDTO) {
-        log.debug("REST request to save Product : {}", productDTO);
-
         if (productDTO.getId() != null) {
             throw new BadRequestAlertException("A new product cannot already have an ID", "productManagement", "idexists");
         }
@@ -93,8 +87,6 @@ public class ProductResource {
     @GetMapping("/products")
     @PreAuthorize("hasAuthority(\"" + AuthoritiesConstants.ADMIN + "\")")
     public Mono<ResponseEntity<Flux<ProductDTO>>> getAllProducts(ServerHttpRequest request, Pageable pageable) {
-        log.debug("REST request to get all Products for an user");
-
         return userService
             .getUserWithAuthorities()
             .flatMap(
@@ -122,7 +114,6 @@ public class ProductResource {
     @PreAuthorize("hasAuthority(\"" + AuthoritiesConstants.ADMIN + "\")")
     @ResponseStatus(code = HttpStatus.NO_CONTENT)
     public Mono<ResponseEntity<Void>> deleteProduct(@PathVariable String id) {
-        log.debug("REST request to delete Product: {}", id);
         return userService
             .getUserWithAuthorities()
             .flatMap(
