@@ -17,8 +17,6 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.validation.Valid;
 import javax.validation.constraints.Pattern;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
@@ -73,8 +71,6 @@ public class UserResource {
         "langKey"
     );
 
-    private final Logger log = LoggerFactory.getLogger(UserResource.class);
-
     @Value("${jhipster.clientApp.name}")
     private String applicationName;
 
@@ -104,11 +100,8 @@ public class UserResource {
     @PostMapping("/users")
     @PreAuthorize("hasAuthority(\"" + AuthoritiesConstants.ADMIN + "\")")
     public Mono<ResponseEntity<AdminUserDTO>> createUser(@Valid @RequestBody AdminUserDTO userDTO) {
-        log.debug("REST request to save User : {}", userDTO);
-
         if (userDTO.getId() != null) {
             throw new BadRequestAlertException("A new user cannot already have an ID", "userManagement", "idexists");
-            // Lowercase the user login before comparing with database
         }
         return userRepository
             .findOneByLogin(userDTO.getLogin().toLowerCase())
@@ -156,7 +149,6 @@ public class UserResource {
     @PutMapping("/users")
     @PreAuthorize("hasAuthority(\"" + AuthoritiesConstants.ADMIN + "\")")
     public Mono<ResponseEntity<AdminUserDTO>> updateUser(@Valid @RequestBody AdminUserDTO userDTO) {
-        log.debug("REST request to update User : {}", userDTO);
         return userRepository
             .findOneByEmailIgnoreCase(userDTO.getEmail())
             .filter(user -> !user.getId().equals(userDTO.getId()))
@@ -199,7 +191,6 @@ public class UserResource {
     @GetMapping("/users")
     @PreAuthorize("hasAuthority(\"" + AuthoritiesConstants.ADMIN + "\")")
     public Mono<ResponseEntity<Flux<AdminUserDTO>>> getAllUsers(ServerHttpRequest request, Pageable pageable) {
-        log.debug("REST request to get all User for an admin");
         if (!onlyContainsAllowedProperties(pageable)) {
             return Mono.just(ResponseEntity.badRequest().build());
         }
@@ -224,7 +215,6 @@ public class UserResource {
     @GetMapping("/users/{login}")
     @PreAuthorize("hasAuthority(\"" + AuthoritiesConstants.ADMIN + "\")")
     public Mono<AdminUserDTO> getUser(@PathVariable String login) {
-        log.debug("REST request to get User : {}", login);
         return userService
             .getUserWithAuthoritiesByLogin(login)
             .map(AdminUserDTO::new)
@@ -241,7 +231,6 @@ public class UserResource {
     @PreAuthorize("hasAuthority(\"" + AuthoritiesConstants.ADMIN + "\")")
     @ResponseStatus(code = HttpStatus.NO_CONTENT)
     public Mono<ResponseEntity<Void>> deleteUser(@PathVariable @Pattern(regexp = Constants.LOGIN_REGEX) String login) {
-        log.debug("REST request to delete User: {}", login);
         return userService
             .deleteUser(login)
             .map(

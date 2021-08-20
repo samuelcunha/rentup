@@ -6,8 +6,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -29,8 +27,6 @@ public class PublicUserResource {
         Arrays.asList("id", "login", "firstName", "lastName", "email", "activated", "langKey")
     );
 
-    private final Logger log = LoggerFactory.getLogger(PublicUserResource.class);
-
     private final UserService userService;
 
     public PublicUserResource(UserService userService) {
@@ -46,7 +42,6 @@ public class PublicUserResource {
      */
     @GetMapping("/users")
     public Mono<ResponseEntity<Flux<UserDTO>>> getAllPublicUsers(ServerHttpRequest request, Pageable pageable) {
-        log.debug("REST request to get all public User names");
         if (!onlyContainsAllowedProperties(pageable)) {
             return Mono.just(ResponseEntity.badRequest().build());
         }

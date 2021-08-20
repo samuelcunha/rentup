@@ -8,9 +8,6 @@ import com.rentup.app.application.product.model.ProductDTO;
 import com.rentup.app.application.user.UserService;
 import com.rentup.app.security.AuthoritiesConstants;
 import java.util.ArrayList;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
@@ -26,11 +23,6 @@ import reactor.core.publisher.Mono;
 @RestController
 @RequestMapping("/api/admin")
 public class ProductSearchResource {
-
-    private final Logger log = LoggerFactory.getLogger(ProductSearchResource.class);
-
-    @Value("${jhipster.clientApp.name}")
-    private String applicationName;
 
     private final UserService userService;
     private final ProductSearchService productSearchService;
@@ -56,8 +48,6 @@ public class ProductSearchResource {
         ServerHttpRequest request,
         Pageable pageable
     ) {
-        log.debug("REST request to get all Products for an user with filter {}", filter);
-
         return userService
             .getUserWithAuthorities()
             .flatMap(

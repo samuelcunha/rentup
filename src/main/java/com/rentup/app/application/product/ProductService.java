@@ -1,6 +1,7 @@
 package com.rentup.app.application.product;
 
-import static com.rentup.app.application.product.mapper.ProductMapper.*;
+import static com.rentup.app.application.product.mapper.ProductMapper.productDTOToProduct;
+import static com.rentup.app.application.product.mapper.ProductMapper.productToProductDTO;
 
 import com.rentup.app.application.product.model.ProductDTO;
 import com.rentup.app.config.Constants;

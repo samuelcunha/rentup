@@ -1,7 +1,7 @@
 package com.rentup.app.application.product;
 
 import static com.rentup.app.application.product.mapper.ProductMapper.productToProductDTO;
-import static java.util.Optional.*;
+import static java.util.Optional.ofNullable;
 
 import com.rentup.app.application.product.model.ProductDTO;
 import com.rentup.app.domain.product.ProductStatus;

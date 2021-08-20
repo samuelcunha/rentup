@@ -1,7 +1,9 @@
 package com.rentup.app.application.rent;
 
-import static com.rentup.app.application.rent.mapper.RentMapper.*;
-import static com.rentup.app.domain.product.ProductStatus.*;
+import static com.rentup.app.application.rent.mapper.RentMapper.newRentOrderByProduct;
+import static com.rentup.app.application.rent.mapper.RentMapper.rentToRentDTO;
+import static com.rentup.app.domain.product.ProductStatus.AVAILABLE;
+import static com.rentup.app.domain.product.ProductStatus.RENTED;
 
 import com.rentup.app.domain.product.Product;
 import com.rentup.app.domain.product.ProductStatus;

@@ -1,7 +1,6 @@
 package com.rentup.app.application.rent;
 
 import java.util.Date;
-import javax.validation.constraints.NotNull;
 
 public class RentDTO {
 
