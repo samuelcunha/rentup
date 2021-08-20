@@ -10,25 +10,32 @@ import com.rentup.app.domain.Authority;
 import com.rentup.app.domain.product.Price;
 import com.rentup.app.domain.product.PriceType;
 import com.rentup.app.domain.product.Product;
+import com.rentup.app.domain.product.ProductStatus;
+import com.rentup.app.domain.rent.Rent;
+import com.rentup.app.domain.rent.RentStatus;
 import com.rentup.app.domain.user.Address;
 import com.rentup.app.domain.user.User;
 import com.rentup.app.security.AuthoritiesConstants;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.util.Date;
 import java.util.UUID;
 
-/**
- * Creates the initial database setup.
- */
 @ChangeLog(order = "001")
 public class InitialSetupMigration {
 
+    private static final String ID_PRODUCT_1 = UUID.randomUUID().toString();
+    private static final String ID_PRODUCT_2 = UUID.randomUUID().toString();
+    private static final String ID_PRODUCT_3 = UUID.randomUUID().toString();
+
     @ChangeSet(order = "01", author = "initiator", id = "01-addAuthorities")
     public void addAuthorities(MongockTemplate mongoTemplate) {
-        Authority adminAuthority = new Authority();
+        var adminAuthority = new Authority();
         adminAuthority.setName(AuthoritiesConstants.ADMIN);
-        Authority userAuthority = new Authority();
+        var userAuthority = new Authority();
         userAuthority.setName(AuthoritiesConstants.USER);
         mongoTemplate.save(adminAuthority);
         mongoTemplate.save(userAuthority);
@@ -36,12 +43,12 @@ public class InitialSetupMigration {
 
     @ChangeSet(order = "02", author = "initiator", id = "02-addUsers")
     public void addUsers(MongockTemplate mongoTemplate) throws ParseException {
-        Authority adminAuthority = new Authority();
+        var adminAuthority = new Authority();
         adminAuthority.setName(AuthoritiesConstants.ADMIN);
-        Authority userAuthority = new Authority();
+        var userAuthority = new Authority();
         userAuthority.setName(AuthoritiesConstants.USER);
 
-        User adminUser = new User();
+        var adminUser = new User();
         adminUser.setId("user-1");
         adminUser.setLogin("admin");
         adminUser.setPassword("$2a$10$gSAhZrxMllrbgj/kkK9UceBPpChGWJA7SYIb1Mqo.n5aNLq1/oRrC");
@@ -58,7 +65,7 @@ public class InitialSetupMigration {
         adminUser.setBirthDate(new SimpleDateFormat(DATE_FORMAT).parse("2003-06-20"));
         mongoTemplate.save(adminUser);
 
-        User adminUser2 = new User();
+        var adminUser2 = new User();
         adminUser2.setId("user-2");
         adminUser2.setLogin("admin2");
         adminUser2.setPassword("$2a$10$gSAhZrxMllrbgj/kkK9UceBPpChGWJA7SYIb1Mqo.n5aNLq1/oRrC");
@@ -75,7 +82,7 @@ public class InitialSetupMigration {
         adminUser2.setBirthDate(new SimpleDateFormat(DATE_FORMAT).parse("2003-06-20"));
         mongoTemplate.save(adminUser2);
 
-        User userUser = new User();
+        var userUser = new User();
         userUser.setId("user-3");
         userUser.setLogin("user");
         userUser.setPassword("$2a$10$VEjxo0jq2YG9Rbk2HmX9S.k1uZBGYUHdUcid3g/vfiEl7lwWgOH/K");
@@ -92,14 +99,15 @@ public class InitialSetupMigration {
         mongoTemplate.save(userUser);
     }
 
-    @ChangeSet(order = "03", author = "initiator", id = "03-addProducts")
+    @ChangeSet(order = "04", author = "initiator", id = "04-addProducts")
     public void addProducts(MongockTemplate mongoTemplate) {
         var product1 = new Product();
-        product1.setId(UUID.randomUUID().toString());
+        product1.setId(ID_PRODUCT_1);
         product1.setUser("user-1");
         product1.setName("Controle DualSense - Branco PS5");
         product1.setCategory("Videogame");
         product1.setPrice(new Price("300", "BRL", PriceType.HOUR));
+        product1.setStatus(ProductStatus.AVAILABLE);
         product1.setImageUrl(
             "https://gmedia.playstation.com/is/image/SIEPDC/co-op-games-duslsense-controllers-image-block-02-en-28jan21?$1600px--t$"
         );
@@ -107,22 +115,44 @@ public class InitialSetupMigration {
         mongoTemplate.save(product1);
 
         var product2 = new Product();
-        product2.setId(UUID.randomUUID().toString());
+        product2.setId(ID_PRODUCT_2);
         product2.setUser("user-1");
         product2.setName("Kit Faqueiro Tramontina");
         product2.setCategory("Cozinha");
+        product2.setStatus(ProductStatus.AVAILABLE);
         product2.setPrice(new Price("1500", "BRL", PriceType.WEEK));
         product2.setDescription("Kit com 10 peças de facas praticamente novas.");
         mongoTemplate.save(product2);
 
         var product3 = new Product();
-        product3.setId(UUID.randomUUID().toString());
+        product3.setId(ID_PRODUCT_3);
         product3.setUser("user-2");
         product3.setName("Kit Faqueiro Tramontina do Outro Usuario");
         product3.setCategory("Cozinha");
+        product3.setStatus(ProductStatus.AVAILABLE);
         product3.setPrice(new Price("500", "BRL", PriceType.WEEK));
         product3.setDescription("Kit com 20 peças de facas praticamente novas.");
         mongoTemplate.save(product3);
+    }
+
+    @ChangeSet(order = "05", author = "initiator", id = "05-addRents")
+    public void addRents(MongockTemplate mongoTemplate) {
+        var rent = new Rent();
+        var initialDate = new Date();
+        var finalDate = Date.from(
+            LocalDateTime.from(initialDate.toInstant().atZone(ZoneId.of("UTC"))).plusDays(1).atZone(ZoneId.of("UTC")).toInstant()
+        );
+
+        rent.setId(UUID.randomUUID().toString());
+        rent.setProductId(ID_PRODUCT_1);
+        rent.setUserOwnerId("user-1");
+        rent.setUserRentId("user-2");
+        rent.setInitialDate(initialDate);
+        rent.setFinalDate(finalDate);
+        rent.setPrice(new Price("500", "BRL", PriceType.DAY));
+        rent.setStatus(RentStatus.REQUESTED);
+        rent.setPaymentType("Credit Card");
+        mongoTemplate.save(rent);
     }
 
     private Address getAddress() {

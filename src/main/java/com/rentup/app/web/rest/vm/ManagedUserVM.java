@@ -1,6 +1,6 @@
 package com.rentup.app.web.rest.vm;
 
-import com.rentup.app.service.dto.AdminUserDTO;
+import com.rentup.app.application.user.model.AdminUserDTO;
 import javax.validation.constraints.Size;
 
 /**

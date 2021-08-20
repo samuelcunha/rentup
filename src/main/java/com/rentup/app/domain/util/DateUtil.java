@@ -5,8 +5,8 @@ import static java.time.temporal.ChronoUnit.YEARS;
 import static java.util.Objects.isNull;
 import static org.apache.commons.lang3.StringUtils.isEmpty;
 
-import com.rentup.app.web.rest.errors.InvalidDateException;
-import com.rentup.app.web.rest.errors.InvalidDateLegalAgeException;
+import com.rentup.app.web.rest.exceptions.InvalidDateException;
+import com.rentup.app.web.rest.exceptions.InvalidDateLegalAgeException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.Instant;

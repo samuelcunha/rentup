@@ -1,12 +1,12 @@
 {
 	"info": {
-		"_postman_id": "98f8a23c-3aa1-484e-9e94-9426bbb54b5e",
+		"_postman_id": "6f73894c-01f4-4f96-95f9-51e45c5c3b56",
 		"name": "rentup",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
 		{
-			"name": "CRUD Users",
+			"name": "Users",
 			"item": [
 				{
 					"name": "Get All Users",
@@ -162,7 +162,6 @@
 				{
 					"listen": "prerequest",
 					"script": {
-						"id": "56cba176-37c3-4361-a1d0-680fddfa4034",
 						"type": "text/javascript",
 						"exec": [
 							""
@@ -172,18 +171,16 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "cd391e42-542f-472b-b1bd-495f4187a51b",
 						"type": "text/javascript",
 						"exec": [
 							""
 						]
 					}
 				}
-			],
-			"protocolProfileBehavior": {}
+			]
 		},
 		{
-			"name": "CRUD Products",
+			"name": "Products",
 			"item": [
 				{
 					"name": "Get All Products by User",
@@ -217,6 +214,38 @@
 					"response": []
 				},
 				{
+					"name": "Get All Products by Search",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN_OAUTH}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/admin/products/search",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"admin",
+								"products",
+								"search"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "Add Product",
 					"request": {
 						"auth": {
@@ -233,7 +262,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"name\": \"Controle DualSense - Preto PS5\",\n    \"category\": \"Videogame\",\n    \"priceBase\": \"200\",\n    \"priceCurrency\": \"BRL\",\n    \"priceType\": \"HOUR\",\n    \"imageUrl\": \"https://gmedia.playstation.com/is/image/SIEPDC/co-op-games-duslsense-controllers-image-block-02-en-28jan21?$1600px--t$\",\n    \"description\": \"Controle em perfeito estado de funcionamento, apenas com 3 meses de uso.\"\n}",
+							"raw": "{\n    \"name\": \"Controle DualSense - Admin2\",\n    \"category\": \"Videogame\",\n    \"priceBase\": \"400\",\n    \"priceCurrency\": \"BRL\",\n    \"priceType\": \"HOUR\",\n    \"imageUrl\": \"https://gmedia.playstation.com/is/image/SIEPDC/co-op-games-duslsense-controllers-image-block-02-en-28jan21?$1600px--t$\",\n    \"description\": \"Controle em perfeito estado de funcionamento, apenas com 3 meses de uso.\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -255,9 +284,196 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "Delete Product",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN_OAUTH}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/admin/products/d09094dc-1900-4030-b3f2-d44ebbf7a621",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"admin",
+								"products",
+								"d09094dc-1900-4030-b3f2-d44ebbf7a621"
+							]
+						}
+					},
+					"response": []
 				}
-			],
-			"protocolProfileBehavior": {}
+			]
+		},
+		{
+			"name": "Rent",
+			"item": [
+				{
+					"name": "Get All Rents by User",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN_OAUTH}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/admin/rents/user",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"admin",
+								"rents",
+								"user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Rents by Owner",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN_OAUTH}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/admin/rents/owner",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"admin",
+								"rents",
+								"owner"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add Rent Order",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN_OAUTH}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"productId\": \"23dfc716-d049-427e-817c-f911459e6e06\",\n    \"initialDate\": \"2021-08-20T02:26:40.710+00:00\",\n    \"finalDate\": \"2021-08-21T02:26:40.710+00:00\",\n    \"status\": \"REQUESTED\",\n    \"paymentType\": \"Credit Card\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/admin/rents",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"admin",
+								"rents"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Rent Order",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN_OAUTH}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{    \n    \"status\": \"FINISHED\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/admin/rents/:id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"admin",
+								"rents",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "611f24d6237c0b67900c291b"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
 		},
 		{
 			"name": "Get API Docs",
@@ -285,7 +501,6 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "a286e6dc-d167-43a3-a1ce-f9a7b2cf5e7d",
 						"exec": [
 							"let jsonData = JSON.parse(responseBody)",
 							"pm.globals.set(\"TOKEN_OAUTH\", jsonData.id_token);",
@@ -300,7 +515,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"username\": \"username\",\n    \"password\": \"password\"\n}",
+					"raw": "{\n    \"username\": \"admin\",\n    \"password\": \"admin\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -322,6 +537,5 @@
 			},
 			"response": []
 		}
-	],
-	"protocolProfileBehavior": {}
+	]
 }

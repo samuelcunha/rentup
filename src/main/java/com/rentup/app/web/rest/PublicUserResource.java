@@ -1,7 +1,7 @@
 package com.rentup.app.web.rest;
 
-import com.rentup.app.service.UserService;
-import com.rentup.app.service.dto.UserDTO;
+import com.rentup.app.application.user.UserService;
+import com.rentup.app.application.user.model.UserDTO;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
