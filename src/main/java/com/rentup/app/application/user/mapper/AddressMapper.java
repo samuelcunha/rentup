@@ -2,7 +2,9 @@ package com.rentup.app.application.user.mapper;
 
 import com.rentup.app.application.user.model.AddressDTO;
 import com.rentup.app.domain.user.Address;
+import lombok.experimental.UtilityClass;
 
+@UtilityClass
 public class AddressMapper {
 
     public static AddressDTO addressToAddressDTO(Address address) {
