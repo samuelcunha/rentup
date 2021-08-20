@@ -3,10 +3,10 @@ package com.rentup.app.web.rest;
 import static org.springframework.web.util.UriComponentsBuilder.fromHttpRequest;
 import static tech.jhipster.web.util.PaginationUtil.generatePaginationHttpHeaders;
 
+import com.rentup.app.application.product.ProductSearchService;
+import com.rentup.app.application.product.model.ProductDTO;
+import com.rentup.app.application.user.UserService;
 import com.rentup.app.security.AuthoritiesConstants;
-import com.rentup.app.service.ProductSearchService;
-import com.rentup.app.service.UserService;
-import com.rentup.app.service.dto.ProductDTO;
 import java.util.ArrayList;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -51,7 +51,7 @@ public class ProductSearchResource {
      */
     @GetMapping("/products/search")
     @PreAuthorize("hasAuthority(\"" + AuthoritiesConstants.ADMIN + "\")")
-    public Mono<ResponseEntity<Flux<ProductDTO>>> getProductsSearch(
+    public Mono<ResponseEntity<Flux<ProductDTO>>> getProductsAvailableSearch(
         @RequestParam(required = false) String filter,
         ServerHttpRequest request,
         Pageable pageable
@@ -63,7 +63,7 @@ public class ProductSearchResource {
             .flatMap(
                 user ->
                     productSearchService
-                        .countProductsByDiffUserAndFilter(filter, user.getId())
+                        .countProductsByDiffUserAndFilterAndAvailable(filter, user.getId())
                         .map(total -> new PageImpl<>(new ArrayList<>(), pageable, total))
                         .map(
                             page ->

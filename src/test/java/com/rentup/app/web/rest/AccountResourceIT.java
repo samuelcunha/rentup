@@ -6,14 +6,14 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import com.rentup.app.IntegrationTest;
 import com.rentup.app.TestUtil;
+import com.rentup.app.application.user.UserService;
+import com.rentup.app.application.user.model.AdminUserDTO;
+import com.rentup.app.application.user.model.PasswordChangeDTO;
 import com.rentup.app.config.Constants;
 import com.rentup.app.domain.user.User;
 import com.rentup.app.repository.AuthorityRepository;
 import com.rentup.app.repository.UserRepository;
 import com.rentup.app.security.AuthoritiesConstants;
-import com.rentup.app.service.UserService;
-import com.rentup.app.service.dto.AdminUserDTO;
-import com.rentup.app.service.dto.PasswordChangeDTO;
 import com.rentup.app.web.rest.vm.KeyAndPasswordVM;
 import com.rentup.app.web.rest.vm.ManagedUserVM;
 import java.text.ParseException;

@@ -5,10 +5,10 @@ import static com.rentup.app.web.rest.UserResourceFixture.initTestUser;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import com.rentup.app.IntegrationTest;
+import com.rentup.app.application.user.model.UserDTO;
 import com.rentup.app.domain.user.User;
 import com.rentup.app.repository.UserRepository;
 import com.rentup.app.security.AuthoritiesConstants;
-import com.rentup.app.service.dto.UserDTO;
 import java.text.ParseException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

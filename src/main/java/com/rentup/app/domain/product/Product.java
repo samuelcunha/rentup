@@ -12,7 +12,7 @@ import org.springframework.data.mongodb.core.mapping.Field;
 @org.springframework.data.mongodb.core.mapping.Document(collection = "jhi_product")
 public class Product extends AbstractAuditingEntity implements Serializable {
 
-    private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 7976896067673498431L;
 
     @Id
     private String id;
@@ -35,7 +35,18 @@ public class Product extends AbstractAuditingEntity implements Serializable {
 
     private String description;
 
-    public Product(String id, String user, String name, String category, Price price, String imageUrl, String description) {
+    private ProductStatus status;
+
+    public Product(
+        String id,
+        String user,
+        String name,
+        String category,
+        Price price,
+        String imageUrl,
+        String description,
+        ProductStatus status
+    ) {
         this.id = id;
         this.user = user;
         this.name = name;
@@ -43,6 +54,7 @@ public class Product extends AbstractAuditingEntity implements Serializable {
         this.price = price;
         this.imageUrl = imageUrl;
         this.description = description;
+        this.status = status;
     }
 
     public Product() {}
@@ -107,10 +119,41 @@ public class Product extends AbstractAuditingEntity implements Serializable {
         this.description = description;
     }
 
+    public ProductStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(ProductStatus status) {
+        this.status = status;
+    }
+
     @Override
     public String toString() {
         return (
-            "Product{" + "id='" + id + '\'' + ", user='" + user + '\'' + ", name='" + name + '\'' + ", category='" + category + '\'' + '}'
+            "Product{" +
+            "id='" +
+            id +
+            '\'' +
+            ", user='" +
+            user +
+            '\'' +
+            ", name='" +
+            name +
+            '\'' +
+            ", category='" +
+            category +
+            '\'' +
+            ", price=" +
+            price +
+            ", imageUrl='" +
+            imageUrl +
+            '\'' +
+            ", description='" +
+            description +
+            '\'' +
+            ", status=" +
+            status +
+            '}'
         );
     }
 }

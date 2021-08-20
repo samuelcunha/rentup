@@ -1,14 +1,14 @@
 package com.rentup.app.web.rest;
 
+import com.rentup.app.application.MailService;
+import com.rentup.app.application.user.UserService;
+import com.rentup.app.application.user.model.AdminUserDTO;
+import com.rentup.app.application.user.model.PasswordChangeDTO;
 import com.rentup.app.repository.UserRepository;
 import com.rentup.app.security.SecurityUtils;
-import com.rentup.app.service.MailService;
-import com.rentup.app.service.UserService;
-import com.rentup.app.service.dto.AdminUserDTO;
-import com.rentup.app.service.dto.PasswordChangeDTO;
-import com.rentup.app.web.rest.errors.EmailAlreadyUsedException;
-import com.rentup.app.web.rest.errors.InvalidPasswordException;
-import com.rentup.app.web.rest.errors.LoginAlreadyUsedException;
+import com.rentup.app.web.rest.exceptions.EmailAlreadyUsedException;
+import com.rentup.app.web.rest.exceptions.InvalidPasswordException;
+import com.rentup.app.web.rest.exceptions.LoginAlreadyUsedException;
 import com.rentup.app.web.rest.vm.KeyAndPasswordVM;
 import com.rentup.app.web.rest.vm.ManagedUserVM;
 import java.security.Principal;

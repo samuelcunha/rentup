@@ -1,16 +1,16 @@
 package com.rentup.app.web.rest;
 
+import com.rentup.app.application.MailService;
+import com.rentup.app.application.user.UserService;
+import com.rentup.app.application.user.mapper.UserMapper;
+import com.rentup.app.application.user.model.AdminUserDTO;
 import com.rentup.app.config.Constants;
 import com.rentup.app.domain.user.User;
 import com.rentup.app.repository.UserRepository;
 import com.rentup.app.security.AuthoritiesConstants;
-import com.rentup.app.service.MailService;
-import com.rentup.app.service.UserService;
-import com.rentup.app.service.dto.AdminUserDTO;
-import com.rentup.app.service.mapper.UserMapper;
-import com.rentup.app.web.rest.errors.BadRequestAlertException;
-import com.rentup.app.web.rest.errors.EmailAlreadyUsedException;
-import com.rentup.app.web.rest.errors.LoginAlreadyUsedException;
+import com.rentup.app.web.rest.exceptions.BadRequestAlertException;
+import com.rentup.app.web.rest.exceptions.EmailAlreadyUsedException;
+import com.rentup.app.web.rest.exceptions.LoginAlreadyUsedException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.ArrayList;

@@ -3,11 +3,11 @@ package com.rentup.app.web.rest;
 import static org.springframework.web.util.UriComponentsBuilder.fromHttpRequest;
 import static tech.jhipster.web.util.PaginationUtil.generatePaginationHttpHeaders;
 
+import com.rentup.app.application.product.ProductService;
+import com.rentup.app.application.product.model.ProductDTO;
+import com.rentup.app.application.user.UserService;
 import com.rentup.app.security.AuthoritiesConstants;
-import com.rentup.app.service.ProductService;
-import com.rentup.app.service.UserService;
-import com.rentup.app.service.dto.ProductDTO;
-import com.rentup.app.web.rest.errors.BadRequestAlertException;
+import com.rentup.app.web.rest.exceptions.BadRequestAlertException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
@@ -54,7 +54,7 @@ public class ProductResource {
      */
     @PostMapping("/products")
     @PreAuthorize("hasAuthority(\"" + AuthoritiesConstants.ADMIN + "\")")
-    public Mono<ResponseEntity<ProductDTO>> createUser(@Valid @RequestBody ProductDTO productDTO) {
+    public Mono<ResponseEntity<ProductDTO>> createProduct(@Valid @RequestBody ProductDTO productDTO) {
         log.debug("REST request to save Product : {}", productDTO);
 
         if (productDTO.getId() != null) {
@@ -92,7 +92,7 @@ public class ProductResource {
      */
     @GetMapping("/products")
     @PreAuthorize("hasAuthority(\"" + AuthoritiesConstants.ADMIN + "\")")
-    public Mono<ResponseEntity<Flux<ProductDTO>>> getAllUsers(ServerHttpRequest request, Pageable pageable) {
+    public Mono<ResponseEntity<Flux<ProductDTO>>> getAllProducts(ServerHttpRequest request, Pageable pageable) {
         log.debug("REST request to get all Products for an user");
 
         return userService
@@ -121,7 +121,7 @@ public class ProductResource {
     @DeleteMapping("/products/{id}")
     @PreAuthorize("hasAuthority(\"" + AuthoritiesConstants.ADMIN + "\")")
     @ResponseStatus(code = HttpStatus.NO_CONTENT)
-    public Mono<ResponseEntity<Void>> deleteUser(@PathVariable String id) {
+    public Mono<ResponseEntity<Void>> deleteProduct(@PathVariable String id) {
         log.debug("REST request to delete Product: {}", id);
         return userService
             .getUserWithAuthorities()
