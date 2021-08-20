@@ -48,22 +48,19 @@ public class UserService {
     }
 
     public Mono<User> activateRegistration(String key) {
-        log.debug("Activating user for activation key {}", key);
         return userRepository
             .findOneByActivationKey(key)
             .flatMap(
                 user -> {
-                    // activate given user for the registration key.
                     user.setActivated(true);
                     user.setActivationKey(null);
                     return saveUser(user);
                 }
             )
-            .doOnNext(user -> log.debug("Activated user: {}", user));
+            .doOnNext(user -> log.info("Activated user"));
     }
 
     public Mono<User> completePasswordReset(String newPassword, String key) {
-        log.debug("Reset user password for reset key {}", key);
         return userRepository
             .findOneByResetKey(key)
             .filter(user -> user.getResetDate().isAfter(Instant.now().minusSeconds(86400)))
@@ -151,7 +148,7 @@ public class UserService {
                         .thenReturn(newUser)
                         .doOnNext(user -> user.setAuthorities(authorities))
                         .flatMap(this::saveUser)
-                        .doOnNext(user -> log.debug("Created Information for User: {}", user));
+                        .doOnNext(user -> log.info("Created Information for User"));
                 }
             );
     }
@@ -189,7 +186,7 @@ public class UserService {
                 }
             )
             .flatMap(this::saveUser)
-            .doOnNext(user1 -> log.debug("Created Information for User: {}", user1));
+            .doOnNext(user1 -> log.info("Created Information for User"));
     }
 
     /**
@@ -224,7 +221,7 @@ public class UserService {
                 }
             )
             .flatMap(this::saveUser)
-            .doOnNext(user -> log.debug("Changed Information for User: {}", user))
+            .doOnNext(user -> log.info("Changed Information for User"))
             .map(AdminUserDTO::new);
     }
 
@@ -232,7 +229,7 @@ public class UserService {
         return userRepository
             .findOneByLogin(login)
             .flatMap(user -> userRepository.delete(user).thenReturn(user))
-            .doOnNext(user -> log.debug("Deleted User: {}", user))
+            .doOnNext(user -> log.info("Deleted User"))
             .then();
     }
 
@@ -262,7 +259,7 @@ public class UserService {
                     return saveUser(user);
                 }
             )
-            .doOnNext(user -> log.debug("Changed Information for User: {}", user))
+            .doOnNext(user -> log.info("Changed Information for User"))
             .then();
     }
 
@@ -298,7 +295,7 @@ public class UserService {
                 }
             )
             .flatMap(this::saveUser)
-            .doOnNext(user -> log.debug("Changed password for User: {}", user))
+            .doOnNext(user -> log.info("Changed password for User"))
             .then();
     }
 
@@ -336,7 +333,7 @@ public class UserService {
         return userRepository
             .findAllByActivatedIsFalseAndActivationKeyIsNotNullAndCreatedDateBefore(Instant.now().minus(3, ChronoUnit.DAYS))
             .flatMap(user -> userRepository.delete(user).thenReturn(user))
-            .doOnNext(user -> log.debug("Deleted User: {}", user));
+            .doOnNext(user -> log.info("Deleted User"));
     }
 
     /**
