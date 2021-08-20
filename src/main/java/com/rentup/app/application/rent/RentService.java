@@ -4,6 +4,7 @@ import static com.rentup.app.application.rent.mapper.RentMapper.*;
 import static com.rentup.app.domain.product.ProductStatus.*;
 
 import com.rentup.app.domain.product.Product;
+import com.rentup.app.domain.product.ProductStatus;
 import com.rentup.app.domain.rent.Rent;
 import com.rentup.app.domain.rent.RentStatus;
 import com.rentup.app.repository.ProductRepository;
@@ -47,17 +48,28 @@ public class RentService {
 
     public Mono<Rent> updateStatusRentOrder(Rent rentToUpdate, RentDTO rentDTO) {
         rentToUpdate.setStatus(RentStatus.valueOf(rentDTO.getStatus()));
+
+        if (rentToUpdate.getStatus().isTerminalStatus()) {
+            return productRepository
+                .findOneById(rentToUpdate.getProductId())
+                .flatMap(product -> doUpdateRentAndProduct(rentToUpdate, product));
+        }
+
         return rentRepository.save(rentToUpdate);
+    }
+
+    private Mono<Rent> doUpdateRentAndProduct(Rent rentToUpdate, Product product) {
+        return rentRepository.save(rentToUpdate).flatMap(rentSuccessfully -> updateProductStatus(product, rentSuccessfully, AVAILABLE));
     }
 
     private Mono<Rent> doSaveNewOrder(RentDTO rentDTO, String userRentId, Product product) {
         rentDTO.setStatus(RentStatus.REQUESTED.name());
         var rent = newRentOrderByProduct(rentDTO, product, userRentId);
-        return rentRepository.save(rent).flatMap(rentSuccessfully -> updateProductToRented(product, rentSuccessfully));
+        return rentRepository.save(rent).flatMap(rentSuccessfully -> updateProductStatus(product, rentSuccessfully, RENTED));
     }
 
-    private Mono<Rent> updateProductToRented(Product product, Rent rentSuccessfully) {
-        product.setStatus(RENTED);
+    private Mono<Rent> updateProductStatus(Product product, Rent rentSuccessfully, ProductStatus status) {
+        product.setStatus(status);
         return productRepository.save(product).map(productSaved -> rentSuccessfully);
     }
 

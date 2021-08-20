@@ -4,5 +4,9 @@ public enum RentStatus {
     REQUESTED,
     CONFIRMED,
     REFUSED,
-    FINISHED,
+    FINISHED;
+
+    public boolean isTerminalStatus() {
+        return this.equals(REFUSED) || this.equals(FINISHED);
+    }
 }

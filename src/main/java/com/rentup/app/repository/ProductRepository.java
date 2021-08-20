@@ -16,6 +16,7 @@ public interface ProductRepository extends ReactiveMongoRepository<Product, Stri
     Flux<Product> findAllByUserNotAndStatusIsAndNameContains(Pageable pageable, String user, ProductStatus status, String name);
     Mono<Product> findOneByIdAndUser(String id, String userId);
     Mono<Product> findOneByIdAndStatus(String id, ProductStatus status);
+    Mono<Product> findOneById(String id);
 
     Mono<Long> countAllByUser(String user);
     Mono<Long> countAllByUserNotAndStatusIs(String user, ProductStatus status);
