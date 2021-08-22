@@ -1,4 +1,5 @@
 node_modules/
+cypress/
 src/main/docker/
 jest.conf.js
 webpack/
