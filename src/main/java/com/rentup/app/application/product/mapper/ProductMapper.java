@@ -49,11 +49,18 @@ public class ProductMapper {
             product.setImageUrl(productDTO.getImageUrl());
             product.setDescription(productDTO.getDescription());
             product.setName(productDTO.getName());
-            product.setStatus(ProductStatus.valueOf(productDTO.getStatus()));
+            product.setStatus(getStatusOrDefaultAvailable(productDTO));
             product.setPrice(
                 new Price(productDTO.getPriceBase(), productDTO.getPriceCurrency(), PriceType.valueOf(productDTO.getPriceType()))
             );
             return product;
         }
+    }
+
+    private static ProductStatus getStatusOrDefaultAvailable(ProductDTO productDTO) {
+        if (isNull(productDTO.getStatus())) {
+            return ProductStatus.AVAILABLE;
+        }
+        return ProductStatus.valueOf(productDTO.getStatus());
     }
 }
