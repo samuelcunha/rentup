@@ -1,7 +1,6 @@
 package com.rentup.app.application.rent;
 
-import static com.rentup.app.application.rent.mapper.RentMapper.newRentOrderByProduct;
-import static com.rentup.app.application.rent.mapper.RentMapper.rentToRentDTO;
+import static com.rentup.app.application.rent.mapper.RentMapper.*;
 import static com.rentup.app.domain.product.ProductStatus.AVAILABLE;
 import static com.rentup.app.domain.product.ProductStatus.RENTED;
 
@@ -11,6 +10,8 @@ import com.rentup.app.domain.rent.Rent;
 import com.rentup.app.domain.rent.RentStatus;
 import com.rentup.app.repository.ProductRepository;
 import com.rentup.app.repository.RentRepository;
+import java.util.function.Function;
+import org.reactivestreams.Publisher;
 import org.springframework.context.MessageSource;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -35,11 +36,11 @@ public class RentService {
     }
 
     public Flux<RentDTO> getAllRentProcessByOwner(Pageable pageable, String userOwnerId) {
-        return rentRepository.findAllByUserOwnerId(pageable, userOwnerId).map(rent -> rentToRentDTO(rent, messageSource));
+        return rentRepository.findAllByUserOwnerId(pageable, userOwnerId).flatMap(convertRentWithProductProperties());
     }
 
     public Flux<RentDTO> getAllRentProcessByRent(Pageable pageable, String userRentId) {
-        return rentRepository.findAllByUserRentId(pageable, userRentId).map(rent -> rentToRentDTO(rent, messageSource));
+        return rentRepository.findAllByUserRentId(pageable, userRentId).flatMap(convertRentWithProductProperties());
     }
 
     public Mono<Rent> createRentOrder(RentDTO rentDTO, String userRentId) {
@@ -60,6 +61,23 @@ public class RentService {
         return rentRepository.save(rentToUpdate);
     }
 
+    public Mono<Long> countRentsByUserOwnerId(String userOwnerId) {
+        return rentRepository.countAllByUserOwnerId(userOwnerId);
+    }
+
+    public Mono<Long> countRentsByUserRentId(String userRentId) {
+        return rentRepository.countAllByUserOwnerId(userRentId);
+    }
+
+    public RentDTO convertRentToDTO(Rent rent) {
+        return rentToRentDTO(rent, messageSource);
+    }
+
+    private Function<Rent, Publisher<? extends RentDTO>> convertRentWithProductProperties() {
+        return rent ->
+            productRepository.findOneById(rent.getProductId()).map(product -> rentToRentDTOWithProduct(rent, product, messageSource));
+    }
+
     private Mono<Rent> doUpdateRentAndProduct(Rent rentToUpdate, Product product) {
         return rentRepository.save(rentToUpdate).flatMap(rentSuccessfully -> updateProductStatus(product, rentSuccessfully, AVAILABLE));
     }
@@ -73,17 +91,5 @@ public class RentService {
     private Mono<Rent> updateProductStatus(Product product, Rent rentSuccessfully, ProductStatus status) {
         product.setStatus(status);
         return productRepository.save(product).map(productSaved -> rentSuccessfully);
-    }
-
-    public Mono<Long> countRentsByUserOwnerId(String userOwnerId) {
-        return rentRepository.countAllByUserOwnerId(userOwnerId);
-    }
-
-    public Mono<Long> countRentsByUserRentId(String userRentId) {
-        return rentRepository.countAllByUserOwnerId(userRentId);
-    }
-
-    public RentDTO convertRentToDTO(Rent rent) {
-        return rentToRentDTO(rent, messageSource);
     }
 }

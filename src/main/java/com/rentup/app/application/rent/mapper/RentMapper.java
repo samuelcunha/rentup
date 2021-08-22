@@ -36,6 +36,26 @@ public class RentMapper {
         }
     }
 
+    public static RentDTO rentToRentDTOWithProduct(Rent rent, Product product, MessageSource messageSource) {
+        if (isNull(rent)) {
+            return new RentDTO();
+        } else {
+            var rentDTO = new RentDTO();
+            rentDTO.setId(rent.getId());
+            rentDTO.setProductId(rent.getProductId());
+            rentDTO.setProductName(product.getName());
+            rentDTO.setProductImageUrl(product.getImageUrl());
+            rentDTO.setUserOwnerId(rent.getUserOwnerId());
+            rentDTO.setUserRentId(rent.getUserRentId());
+            rentDTO.setInitialDate(rent.getInitialDate());
+            rentDTO.setFinalDate(rent.getFinalDate());
+            rentDTO.setStatus(rent.getStatus().name());
+            rentDTO.setPaymentType(rent.getPaymentType());
+            setPriceByEnum(rent, messageSource, rentDTO);
+            return rentDTO;
+        }
+    }
+
     public static Rent newRentOrderByProduct(RentDTO rentDTO, Product product, String userRentId) {
         var rent = new Rent();
         rent.setProductId(product.getId());
