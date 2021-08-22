@@ -6,6 +6,7 @@ import LoadingBar from 'react-redux-loading-bar';
 import StorefrontIcon from '@material-ui/icons/Storefront';
 import HomeIcon from '@material-ui/icons/Home';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import AppsIcon from '@material-ui/icons/Apps';
 
 import {
   AppBar,
@@ -25,6 +26,9 @@ import {
 import MenuIcon from '@material-ui/icons/Menu';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import ArrowBackIcon from '@material-ui/icons/ArrowBack';
+import ThumbsUpDownIcon from '@material-ui/icons/ThumbsUpDown';
+import { useHistory } from 'react-router';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -47,6 +51,7 @@ const useStyles = makeStyles(theme => ({
 
 const Header = props => {
   const classes = useStyles();
+  const history = useHistory();
   const [menuOpen, setMenuOpen] = useState(false);
 
   const renderDrawer = () => (
@@ -68,9 +73,25 @@ const Header = props => {
         <Link to="/products/user">
           <ListItem button>
             <ListItemIcon>
+              <AppsIcon />
+            </ListItemIcon>
+            <ListItemText primary="Meus Produtos" />
+          </ListItem>
+        </Link>
+        <Link to="/rents/my-rents">
+          <ListItem button>
+            <ListItemIcon>
               <StorefrontIcon />
             </ListItemIcon>
-            <ListItemText primary="Meus Anúncios" />
+            <ListItemText primary="Meus Aluguéis" />
+          </ListItem>
+        </Link>
+        <Link to="/rents/manage-rents">
+          <ListItem button>
+            <ListItemIcon>
+              <ThumbsUpDownIcon />
+            </ListItemIcon>
+            <ListItemText primary="Solicitações" />
           </ListItem>
         </Link>
         <Link to="/logout">
@@ -86,11 +107,23 @@ const Header = props => {
   );
 
   return (
-    <div className={classes.root}>
+    <div className={classes.root} data-cy="header">
       <AppBar position="static">
         <LoadingBar className="loading-bar" />
         <Toolbar>
-          {props.isAuthenticated && (
+          {props.showBack && (
+            <IconButton
+              edge="start"
+              color="inherit"
+              onClick={() => {
+                history.goBack();
+              }}
+            >
+              <ArrowBackIcon />
+            </IconButton>
+          )}
+
+          {props.isAuthenticated && !props.showBack && (
             <IconButton edge="start" className={classes.menuButton} color="inherit" onClick={() => setMenuOpen(true)}>
               <MenuIcon />
             </IconButton>

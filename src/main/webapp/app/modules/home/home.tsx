@@ -56,17 +56,33 @@ export const Home = props => {
           </Grid>
 
           <Grid item xs={12} className={classes.actions}>
-            <Button variant="contained" color="primary" disableElevation component={Link} to="/login" className={classes.button}>
+            <Button
+              data-cy="loginButton"
+              variant="contained"
+              color="primary"
+              disableElevation
+              component={Link}
+              to="/login"
+              className={classes.button}
+            >
               Login
             </Button>
-            <Button variant="contained" color="primary" disableElevation component={Link} to="/account/register" className={classes.button}>
+            <Button
+              data-cy="registerButton"
+              variant="contained"
+              color="primary"
+              disableElevation
+              component={Link}
+              to="/account/register"
+              className={classes.button}
+            >
               Registrar
             </Button>
           </Grid>
         </Grid>
       ) : (
         <>
-          <Header title="Início"></Header>
+          <Header showMenu title="Início"></Header>
           <Container maxWidth={false}>
             <Grid container justify="center" spacing={3} direction="column" alignItems="center">
               <Grid item xs={12}>
@@ -75,7 +91,7 @@ export const Home = props => {
               <Grid item lg={6}>
                 <Link to="/products/search">
                   <Paper component="form" className={classes.search}>
-                    <InputBase placeholder="Encontre um produto..." readOnly />
+                    <InputBase placeholder="Encontre um produto..." readOnly data-cy="searchField" />
                     <IconButton type="submit" className={classes.iconButton} aria-label="search">
                       <SearchIcon />
                     </IconButton>
@@ -84,6 +100,7 @@ export const Home = props => {
               </Grid>
               <Grid item>
                 <Button
+                  data-cy="addProductButton"
                   variant="contained"
                   color="secondary"
                   disableElevation

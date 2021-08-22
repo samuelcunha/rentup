@@ -86,7 +86,7 @@ export const RegisterPage = props => {
 
   return (
     <Container disableGutters maxWidth={false}>
-      <Header title="Registrar"></Header>
+      <Header showBack title="Registrar"></Header>
       <Container className={classes.container} maxWidth={false}>
         <form noValidate autoComplete="off" onSubmit={handleSubmit(onSubmit)}>
           <Grid container spacing={0} direction="column" alignItems="center" className={classes.container}>
@@ -250,8 +250,7 @@ export const RegisterPage = props => {
   );
 };
 
-const mapStateToProps = ({ locale, register }: IRootState) => ({
-  currentLocale: locale.currentLocale,
+const mapStateToProps = ({ register }: IRootState) => ({
   register,
 });
 

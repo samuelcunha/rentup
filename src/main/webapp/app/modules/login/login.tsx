@@ -64,6 +64,7 @@ export const Login = props => {
                   {...register('username', { required: true, maxLength: 50 })}
                   error={!!errors.username}
                   helperText={errors.username?.type === 'required' && 'Usuário é obrigatório'}
+                  data-cy="userField"
                   label="Usuário"
                   required
                   fullWidth
@@ -75,6 +76,7 @@ export const Login = props => {
                   error={!!errors.password}
                   helperText={errors.password?.type === 'required' && 'Senha é obrigatória'}
                   required
+                  data-cy="passwordField"
                   label="Senha"
                   type="password"
                   fullWidth
@@ -107,12 +109,12 @@ export const Login = props => {
             justify="space-between"
             className={!props.loginError ? classes.actions : null}
           >
-            <Link to="/account/register">
+            <Link data-cy="registerButton" to="/account/register">
               <Button color="secondary" type="button">
                 Criar conta
               </Button>
             </Link>
-            <Button variant="contained" color="primary" type="submit">
+            <Button data-cy="submit" variant="contained" color="primary" type="submit">
               Entrar
             </Button>
           </Grid>

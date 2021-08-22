@@ -15,6 +15,9 @@ import createProduct, { CreateProductState } from 'app/modules/products/create-p
 import passwordReset, { PasswordResetState } from 'app/modules/account/password-reset/password-reset.reducer';
 import listProducts, { ListProductsState } from 'app/modules/products/list-products/list-products.reducer';
 import searchProduct, { SearchProductState } from 'app/modules/products/search-product/search-product.reducer';
+import manageRents, { ManageRentsState } from 'app/modules/rents/manage-rents/manage-rents.reducer';
+import myRents, { MyRentsState } from 'app/modules/rents/my-rents/my-rents.reducer';
+import requestRent, { RequestRentState } from 'app/modules/rents/request-rent/request-rent.reducer';
 
 /* jhipster-needle-add-reducer-import - JHipster will add reducer here */
 
@@ -34,6 +37,9 @@ export interface IRootState {
   readonly createProduct: CreateProductState;
   readonly listProducts: ListProductsState;
   readonly searchProduct: SearchProductState;
+  readonly manageRents: ManageRentsState;
+  readonly myRents: MyRentsState;
+  readonly requestRent: RequestRentState;
 }
 
 const rootReducer = combineReducers<IRootState>({
@@ -52,6 +58,9 @@ const rootReducer = combineReducers<IRootState>({
   createProduct,
   listProducts,
   searchProduct,
+  manageRents,
+  myRents,
+  requestRent,
 });
 
 export default rootReducer;

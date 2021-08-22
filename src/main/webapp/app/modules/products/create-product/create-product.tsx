@@ -83,7 +83,7 @@ export const CreateProduct = props => {
 
   return (
     <Container disableGutters maxWidth={false}>
-      <Header title="Anunciar Produto"></Header>
+      <Header showBack title="Anunciar Produto"></Header>
       <Container className={classes.container} maxWidth={false}>
         <form noValidate autoComplete="off" onSubmit={handleSubmit(onSubmit)} className={classes.form}>
           <Grid container spacing={0} direction="column" alignItems="center" className={classes.container}>
@@ -94,6 +94,7 @@ export const CreateProduct = props => {
                     {...register('name', { required: true, maxLength: 100 })}
                     error={!!errors.name}
                     helperText={errors?.name?.type === 'required' && 'Nome é obrigatório'}
+                    data-cy="nameField"
                     label="Nome"
                     required
                     fullWidth
@@ -110,6 +111,7 @@ export const CreateProduct = props => {
                           <Select
                             labelId="category-label"
                             id="category"
+                            data-cy="categoryField"
                             fullWidth
                             required
                             displayEmpty
@@ -118,6 +120,7 @@ export const CreateProduct = props => {
                           >
                             <MenuItem value=""></MenuItem>
                             <MenuItem value="Eletrodoméstico">Eletrodoméstico</MenuItem>
+                            <MenuItem value="Cozinha">Cozinha</MenuItem>
                             <MenuItem value="Ferramenta">Ferramenta</MenuItem>
                             <MenuItem value="Imóvel">Imóvel</MenuItem>
                             <MenuItem value="Instrumento Musical">Instrumento Musical</MenuItem>
@@ -138,6 +141,7 @@ export const CreateProduct = props => {
                       required: true,
                     })}
                     type="number"
+                    data-cy="priceBaseField"
                     error={!!errors.priceBase}
                     helperText={errors?.priceBase?.type === 'required' && 'Preço é obrigatório'}
                     required
@@ -191,6 +195,7 @@ export const CreateProduct = props => {
                     error={!!errors.description}
                     helperText={errors.description?.type === 'required' && 'Descrição é obrigatória'}
                     required
+                    data-cy="descriptionField"
                     multiline
                     rows={2}
                     rowsMax={4}
@@ -201,7 +206,7 @@ export const CreateProduct = props => {
               </Grid>
             </Grid>
           </Grid>
-          <Button className={classes.footerButton} variant="contained" color="primary" type="submit">
+          <Button data-cy="submit" className={classes.footerButton} variant="contained" color="primary" type="submit">
             Anunciar Produto
           </Button>
         </form>

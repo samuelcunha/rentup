@@ -5,8 +5,8 @@ import Header from '../../../shared/layout/header/header';
 import { Container, Grid, makeStyles } from '@material-ui/core';
 import { reset } from '../../administration/user-management/user-management.reducer';
 import { connect } from 'react-redux';
-import { getProducts } from './list-products.reducer';
-import ProductCard from 'app/shared/layout/product-card/product-card';
+import { getMyRents } from './my-rents.reducer';
+import RentCard from 'app/shared/layout/rent-card/rent-card';
 
 const useStyles = makeStyles(theme => ({
   container: {
@@ -43,11 +43,11 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export const ListProducts = props => {
+export const MyRents = props => {
   useEffect(() => {
     props.reset();
-    props.getProducts();
-    props.listProducts.listProductsSuccess = false;
+    props.getMyRents();
+    props.myRents.myRentsSuccess = false;
     return () => {
       props.reset();
     };
@@ -56,13 +56,13 @@ export const ListProducts = props => {
 
   return (
     <Container disableGutters maxWidth={false}>
-      <Header title="Meus Produtos"></Header>
+      <Header title="Meus Aluguéis"></Header>
       <Container className={classes.container} maxWidth={false}>
         <Grid container spacing={1}>
-          {props.listProducts.products.map((product, i) => {
+          {props.myRents.products.map((product, i) => {
             return (
               <Grid item key={i} xs={12} lg={12}>
-                <ProductCard product={product} />
+                <RentCard product={product} onConfirm={a => console.log(a)} />
               </Grid>
             );
           })}
@@ -72,11 +72,11 @@ export const ListProducts = props => {
   );
 };
 
-const mapStateToProps = ({ locale, listProducts }: IRootState) => ({
+const mapStateToProps = ({ locale, myRents }: IRootState) => ({
   currentLocale: locale.currentLocale,
-  listProducts,
+  myRents,
 });
 
-const mapDispatchToProps = { getProducts, reset };
+const mapDispatchToProps = { getMyRents, reset };
 
-export default connect(mapStateToProps, mapDispatchToProps)(ListProducts);
+export default connect(mapStateToProps, mapDispatchToProps)(MyRents);

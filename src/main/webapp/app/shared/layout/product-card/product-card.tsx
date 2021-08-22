@@ -44,7 +44,7 @@ const getProductImage = product => {
 const ProductCard = props => {
   const classes = useStyles();
   return (
-    <Card className={classes.root}>
+    <Card className={classes.root} onClick={() => props.onClick(props.product)}>
       <CardMedia className={classes.image} image={getProductImage(props.product)} />
       <div className={classes.details}>
         <CardContent className={`${classes.content} `}>
