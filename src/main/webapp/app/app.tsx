@@ -21,8 +21,11 @@ const baseHref = document.querySelector('base').getAttribute('href').replace(/\/
 
 export const App = props => {
   useEffect(() => {
-    props.getSession();
-    props.getProfile();
+    const token = sessionStorage.getItem('key') || localStorage.getItem('jhi-authenticationToken');
+    if (token) {
+      props.getSession();
+      props.getProfile();
+    }
   }, []);
 
   return (

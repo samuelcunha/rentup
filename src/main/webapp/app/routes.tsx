@@ -17,6 +17,9 @@ import ErrorBoundaryRoute from 'app/shared/error/error-boundary-route';
 import PageNotFound from 'app/shared/error/page-not-found';
 import { AUTHORITIES } from 'app/config/constants';
 import searchProduct from 'app/modules/products/search-product/search-product';
+import MyRents from 'app/modules/rents/my-rents/my-rents';
+import ManageRents from 'app/modules/rents/manage-rents/manage-rents';
+import RequestRent from 'app/modules/rents/request-rent/request-rent';
 
 const Account = Loadable({
   loader: () => import(/* webpackChunkName: "account" */ 'app/modules/account'),
@@ -42,6 +45,9 @@ const Routes = () => {
         <ErrorBoundaryRoute path="/products/user" component={ListProducts} />
         <ErrorBoundaryRoute path="/products/user/:userId" component={ListProducts} />
         <ErrorBoundaryRoute path="/products/search" component={searchProduct} />
+        <ErrorBoundaryRoute path="/rents/my-rents" component={MyRents} />
+        <ErrorBoundaryRoute path="/rents/manage-rents" component={ManageRents} />
+        <ErrorBoundaryRoute path="/rents/request-rent" component={RequestRent} />
         <PrivateRoute path="/admin" component={Admin} hasAnyAuthorities={[AUTHORITIES.ADMIN]} />
         <PrivateRoute path="/account" component={Account} hasAnyAuthorities={[AUTHORITIES.ADMIN, AUTHORITIES.USER]} />
         <ErrorBoundaryRoute path="/" exact component={Home} />

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import { IRootState } from 'app/shared/reducers';
 import { AppBar, Container, Grid, IconButton, InputBase, makeStyles, Toolbar } from '@material-ui/core';
@@ -7,6 +7,7 @@ import { connect } from 'react-redux';
 import { findProduct } from './search-product.reducer';
 import ProductCard from 'app/shared/layout/product-card/product-card';
 import { useHistory } from 'react-router';
+import { Redirect } from 'react-router-dom';
 
 const useStyles = makeStyles(() => ({
   container: {
@@ -30,6 +31,7 @@ const useStyles = makeStyles(() => ({
 
 export const SearchProduct = props => {
   const history = useHistory();
+  const [selectedProduct, setSelectedProduct] = useState(null);
   useEffect(() => {
     props.findProduct(props.searchProduct.filter);
     props.reset();
@@ -50,8 +52,20 @@ export const SearchProduct = props => {
     }
   };
 
+  const rentProduct = product => {
+    setSelectedProduct(product);
+  };
+
   return (
     <Container disableGutters maxWidth={false}>
+      {selectedProduct && (
+        <Redirect
+          to={{
+            pathname: '/rents/request-rent',
+            state: { product: selectedProduct },
+          }}
+        />
+      )}
       <div>
         <AppBar position="fixed">
           <Toolbar>
@@ -76,7 +90,7 @@ export const SearchProduct = props => {
           {props.searchProduct.products.map((product, i) => {
             return (
               <Grid item key={i} xs={12} lg={12}>
-                <ProductCard product={product} />
+                <ProductCard product={product} onClick={rentProduct} />
               </Grid>
             );
           })}

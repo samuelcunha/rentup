@@ -5,8 +5,8 @@ import Header from '../../../shared/layout/header/header';
 import { Container, Grid, makeStyles } from '@material-ui/core';
 import { reset } from '../../administration/user-management/user-management.reducer';
 import { connect } from 'react-redux';
-import { getProducts } from './list-products.reducer';
-import ProductCard from 'app/shared/layout/product-card/product-card';
+import { getManageRents, updateStatus } from './manage-rents.reducer';
+import RentCard from 'app/shared/layout/rent-card/rent-card';
 
 const useStyles = makeStyles(theme => ({
   container: {
@@ -43,26 +43,38 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export const ListProducts = props => {
+export const ManageRents = props => {
   useEffect(() => {
     props.reset();
-    props.getProducts();
-    props.listProducts.listProductsSuccess = false;
+    props.getManageRents();
+    props.manageRents.manageRentsSuccess = false;
     return () => {
       props.reset();
     };
   }, []);
   const classes = useStyles();
 
+  if (props.manageRents.refresh) {
+    props.getManageRents();
+  }
+
+  const onAccept = product => {
+    props.updateStatus(product.id, 'CONFIRMED');
+  };
+
+  const onFinish = product => {
+    props.updateStatus(product.id, 'FINISHED');
+  };
+
   return (
     <Container disableGutters maxWidth={false}>
-      <Header title="Meus Produtos"></Header>
+      <Header title="Solicitações de Aluguel"></Header>
       <Container className={classes.container} maxWidth={false}>
         <Grid container spacing={1}>
-          {props.listProducts.products.map((product, i) => {
+          {props.manageRents.products.map((product, i) => {
             return (
               <Grid item key={i} xs={12} lg={12}>
-                <ProductCard product={product} />
+                <RentCard allowManage product={product} onAccept={onAccept} onFinish={onFinish} />
               </Grid>
             );
           })}
@@ -72,11 +84,11 @@ export const ListProducts = props => {
   );
 };
 
-const mapStateToProps = ({ locale, listProducts }: IRootState) => ({
+const mapStateToProps = ({ locale, manageRents }: IRootState) => ({
   currentLocale: locale.currentLocale,
-  listProducts,
+  manageRents,
 });
 
-const mapDispatchToProps = { getProducts, reset };
+const mapDispatchToProps = { getManageRents, updateStatus, reset };
 
-export default connect(mapStateToProps, mapDispatchToProps)(ListProducts);
+export default connect(mapStateToProps, mapDispatchToProps)(ManageRents);
