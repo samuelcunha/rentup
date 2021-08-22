@@ -66,6 +66,10 @@ export const ManageRents = props => {
     props.updateStatus(product.id, 'FINISHED');
   };
 
+  const onReject = product => {
+    props.updateStatus(product.id, 'REFUSED');
+  };
+
   return (
     <Container disableGutters maxWidth={false}>
       <Header title="Solicitações de Aluguel"></Header>
@@ -74,7 +78,7 @@ export const ManageRents = props => {
           {props.manageRents.products.map((product, i) => {
             return (
               <Grid item key={i} xs={12} lg={12}>
-                <RentCard allowManage product={product} onAccept={onAccept} onFinish={onFinish} />
+                <RentCard allowManage product={product} onAccept={onAccept} onFinish={onFinish} onReject={onReject} />
               </Grid>
             );
           })}
