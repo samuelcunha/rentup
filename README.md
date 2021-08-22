@@ -22,11 +22,12 @@ Com seu cadastro realizado, é possível incluir novos produtos ao seu portfóli
 
 - Backend: Java, Quarkus
 - Frontend: React
-- BD: MySQL e NoSQL (MongoDB)
+- BD: NoSQL (MongoDB)
 - Testes: JUnit, Jest, Cypress
 - Linter: ESLint, Prettier
 - CI/CD: Github Actions
 - Logging/Analytics: Firebase
+- Quality: SonarCloud
 
 ## Histórias de Usuário
 
