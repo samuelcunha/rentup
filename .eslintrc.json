@@ -56,7 +56,15 @@
     "@typescript-eslint/unbound-method": "off",
     "@typescript-eslint/array-type": "off",
     "@typescript-eslint/no-shadow": "error",
-    "spaced-comment": ["warn", "always"],
+    "spaced-comment": [
+      "warn",
+      "always",
+      {
+        "line": {
+          "markers": ["/"]
+        }
+      }
+    ],
     "guard-for-in": "error",
     "no-labels": "error",
     "no-caller": "error",
